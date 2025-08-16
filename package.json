@@ -1,6 +1,6 @@
 {
   "name": "@shixinde/apifox-swagger",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": "袁果锅",
   "type": "module",
   "description": "从 Apifox 导出 Swagger/OpenAPI 文档并生成 TypeScript 类型定义的工具",
