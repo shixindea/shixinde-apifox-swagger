@@ -34,7 +34,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "apifox-swagger": "./dist/cli.js"
+    "apifox-swagger": "dist/cli.js"
   },
   "exports": {
     ".": {
@@ -46,7 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shixindea/-shixinde-utils"
+    "url": "git+https://github.com/shixindea/shixinde-apifox-swagger.git"
   },
   "files": [
     "dist/**/*",

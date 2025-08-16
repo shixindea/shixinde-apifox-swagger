@@ -58,12 +58,3 @@ fi
 
 echo -e "${GREEN}🎉 所有操作完成！${NC}"
 
-
-
-
-# 4. 更新版本号
-echo -e "${YELLOW}🔢 更新版本号...${NC}"
-npm version patch
-
-npm publish
-

@@ -27,25 +27,3 @@ echo -e "${GREEN}✅ 构建成功！${NC}"
 echo -e "${YELLOW}📝 提交构建文件...${NC}"
 git add .
 git diff --staged --quiet || git commit -m "build: 构建文件更新 $(date +%F\ %T)"
-
-# 4. 更新版本号
-echo -e "${YELLOW}🔢 更新版本号...${NC}"
-npm version patch
-
-if [ $? -ne 0 ]; then
-    echo -e "${RED}😭😭😭 版本更新失败！${NC}"
-    exit 1
-fi
-
-# 5. 发布到 npm
-echo -e "${YELLOW}📤 发布到 npm...${NC}"
-npm publish
-
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}😀😀😀 💨 发布成功！${NC}"
-else
-    echo -e "${RED}😭😭😭 💨 发布失败！${NC}"
-    exit 1
-fi
-
-echo -e "${GREEN}🎉 npm 发布完成！${NC}"
