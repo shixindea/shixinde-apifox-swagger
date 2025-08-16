@@ -1,19 +1,21 @@
 {
-  "name": "@shixinde/utils",
-  "version": "1.0.10",
-  "author": "yuanxinde",
+  "name": "@shixinde/apifox-swagger",
+  "version": "1.0.0",
+  "author": "袁果锅",
   "type": "module",
   "description": "果锅工具类",
   "keywords": [
     "@shixinde",
-    "utils",
-    "validate"
+    "袁果锅",
+    "apifox-swagger",
+    "apifox",
+    "swagger",
+    "apifox-swagger-tool"
   ],
   "scripts": {
     "dev": "vite",
     "gitcz": "git-cz",
     "start": "vite",
-    "test": "jest --verbose",
     "build": "vite build",
     "preview": "vite preview",
     "release": "rm -rf dist && npm run build &&npm version patch && npm publish",
@@ -26,21 +28,7 @@
       "czConfig": "node_modules/@shixinde/guoguo-cz/commitlint.config.cjs"
     }
   },
-  "jest": {
-    "rootDir": "tests",
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
+
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -55,13 +43,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^29.5.12",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vuepress/bundler-vite": "2.0.0-rc.14",
     "@vuepress/theme-default": "2.0.0-rc.37",
     "cz-git": "^1.9.3",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.5",
     "typescript": "^5.1.6",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.5.2",
