@@ -65,20 +65,5 @@ echo -e "${GREEN}🎉 所有操作完成！${NC}"
 echo -e "${YELLOW}🔢 更新版本号...${NC}"
 npm version patch
 
-if [ $? -ne 0 ]; then
-    echo -e "${RED}😭😭😭 版本更新失败！${NC}"
-    exit 1
-fi
-
-# 5. 发布到 npm
-echo -e "${YELLOW}📤 发布到 npm...${NC}"
 npm publish
 
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}😀😀😀 💨 发布成功！${NC}"
-else
-    echo -e "${RED}😭😭😭 💨 发布失败！${NC}"
-    exit 1
-fi
-
-echo -e "${GREEN}🎉 npm 发布完成！${NC}"
