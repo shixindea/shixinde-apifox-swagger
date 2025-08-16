@@ -1,4 +1,3 @@
-
 rm -rf ./docs/
 
 pnpm docs:build

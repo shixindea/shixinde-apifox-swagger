@@ -14,7 +14,7 @@ export { exportSwagger, fetchSwagger, fetchSwaggerLocal } from './apifox.js';
 
 // 导出 CLI 相关功能
 // @ts-ignore
-export { initCommandApifox } from './cli/index.js';
+export { initCommandApifox } from './index.js';
 
 // 类型定义
 export interface ExportSwaggerOptions {
@@ -28,6 +28,8 @@ export interface ExportSwaggerOptions {
   folderName?: string;
   /** 是否从本地 Apifox 客户端获取 */
   useLocal?: boolean;
+ /** 访问令牌 */
+  token?: string;
 }
 
 export interface ApifoxCliOptions {

@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "author": "袁果锅",
   "type": "module",
-  "description": "果锅工具类",
+  "description": "从 Apifox 导出 Swagger/OpenAPI 文档并生成 TypeScript 类型定义的工具",
   "keywords": [
     "@shixinde",
-    "袁果锅",
-    "apifox-swagger",
     "apifox",
     "swagger",
-    "apifox-swagger-tool"
+    "openapi",
+    "typescript",
+    "api",
+    "documentation",
+    "cli"
   ],
   "scripts": {
     "dev": "vite",
@@ -31,6 +33,17 @@
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "apifox-swagger": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./cli": "./dist/cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/shixindea/-shixinde-utils"

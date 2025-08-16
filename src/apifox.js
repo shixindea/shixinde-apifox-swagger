@@ -99,11 +99,10 @@ const fetchSwaggerLocal = async (projectIds) => {
  * @returns {Promise<Object>} 返回 Swagger 文档对象
  * @throws {Error} 如果 APIFOX_ACCESS_TOKEN 环境变量未设置则抛出错误
  */
-const fetchSwagger = async (projectId, folderId) => {
-    // 验证必需的环境变量
+const fetchSwagger = async (projectId, folderId, token) => {
+    // 访问令牌
     (0, __WEBPACK_EXTERNAL_MODULE_tiny_invariant__["default"])(
-        // process.env.APIFOX_ACCESS_TOKEN
-        "APS-X2Qz1fqd02Thbnfj2z4Vw3nCN9z4VKEP"
+        token
         , 'APIFOX_ACCESS_TOKEN is required');
 
     // 根据是否提供文件夹 ID 来设置导出范围
@@ -122,10 +121,8 @@ const fetchSwagger = async (projectId, folderId) => {
         headers: {
             'X-Apifox-Api-Version': '2024-03-28',  // API 版本
             'Content-Type': 'application/json',
-            Authorization: `Bearer APS-X2Qz1fqd02Thbnfj2z4Vw3nCN9z4VKEP`
-
-            // ${process.env.APIFOX_ACCESS_TOKEN}
-            // `  // 访问令牌
+            Authorization: `Bearer ${token}`
+           // 访问令牌
         },
         redirect: 'follow',
         body: JSON.stringify({
@@ -155,16 +152,23 @@ const fetchSwagger = async (projectId, folderId) => {
  * @param {string} [options.folderName] - 可选的文件夹名称，用于文件命名
  * @returns {Promise<Object>} 返回获取到的 Swagger 文档对象
  */
-const exportSwagger = async ({ projectId, outputDir, folderId, folderName }) => {
-    // 注释：也可以从本地获取 Swagger 文档
-    // const swagger = await fetchSwaggerLocal()
-
-    // 构建日志信息，显示导出的范围
-    const folder = folderId ? `folder [${folderId}] to <${folderName}>` : 'to <all>';
-    console.log(`Fetching swagger from apifox project [${projectId}] ${folder}...`);
-
-    // 从 Apifox 获取 Swagger 文档
-    const swagger = await fetchSwagger(projectId, folderId);
+const exportSwagger = async ({ projectId, outputDir, folderId, folderName, useLocal, token }) => {
+    let swagger;
+    
+    if (useLocal) {
+        // 从本地 Apifox 客户端获取 Swagger 文档
+        console.log('Fetching swagger from local Apifox client...');
+        swagger = await fetchSwaggerLocal(projectId ? [projectId] : undefined);
+        
+        if (!swagger) {
+            throw new Error('Failed to fetch swagger from local Apifox client. Please ensure Apifox is running and has projects loaded.');
+        }
+    } else {
+        // 从云端 API 获取 Swagger 文档
+        const folder = folderId ? `folder [${folderId}] to <${folderName}>` : 'to <all>';
+        console.log(`Fetching swagger from apifox project [${projectId}] ${folder}...`);
+        swagger = await fetchSwagger(projectId, folderId, token);
+    }
 
     // 构建输出文件路径
     const swaggerPath = `${outputDir}/swagger/${folderName ?? 'all'}.json`;
@@ -211,7 +215,8 @@ const exportSwagger = async ({ projectId, outputDir, folderId, folderName }) => 
     });
 
     // 保存 TypeScript 类型定义文件
-    __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].writeFileSync(swaggerTSPath, (0, __WEBPACK_EXTERNAL_MODULE_openapi_typescript__.astToString)(ast));
+    __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].writeFileSync(swaggerTSPath,
+        (0, __WEBPACK_EXTERNAL_MODULE_openapi_typescript__.astToString)(ast));
 
     // 输出成功信息
     console.log(`Exported swagger [json] to ${swaggerPath}`);
