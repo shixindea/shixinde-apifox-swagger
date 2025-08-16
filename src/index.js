@@ -23,7 +23,7 @@ const initCommandApifox = (cli) => {
             }
             
             // 获取 token：优先使用命令行参数，其次使用环境变量
-            const token = options.token || process.env.APIFOX_ACCESS_TOKEN;
+            const token = options.token || globalThis.process?.env?.APIFOX_ACCESS_TOKEN;
             
             const { exportSwagger } = await import("./apifox.js");
             await exportSwagger({

@@ -15,12 +15,12 @@
     "cli"
   ],
   "scripts": {
-    "dev": "vite",
     "gitcz": "git-cz",
     "start": "vite",
-    "build": "vite build",
+    "build": "./release.sh",
     "preview": "vite preview",
-    "release": "rm -rf dist && npm run build &&npm version patch && npm publish",
+    "release": "./release.sh",
+    "publish": "./publish.sh",
     "docs:dev": "vuepress dev docs-vuepress",
     "docs:build": "vuepress build docs-vuepress"
   },
