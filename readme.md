@@ -43,7 +43,7 @@ apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --token your
 APIFOX_ACCESS_TOKEN=your-token apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output
 ```
 
-#### 本地模式
+<!-- #### 本地模式（）
 
 ```bash
 # 从本地 Apifox 客户端导出（需要 Apifox 客户端运行）
@@ -51,7 +51,7 @@ apifox-swagger apifox-swagger --local --outdir ./output
 
 # 诊断本地客户端状态
 ./diagnose-local.sh
-```
+``` -->
 
 #### 命令行选项
 
@@ -186,7 +186,7 @@ APIFOX_PROJECT_ID=2364643
 
 ## 故障排除
 
-### 本地模式问题
+<!-- ### 本地模式问题
 
 如果本地模式导出失败，请按以下步骤排查：
 
@@ -209,7 +209,7 @@ APIFOX_PROJECT_ID=2364643
 4. **常见解决方案**：
    - 重启 Apifox 应用程序
    - 确保项目中至少有一个 API 接口
-   - 检查防火墙是否阻止本地连接
+   - 检查防火墙是否阻止本地连接 -->
 
 ### 云端模式问题
 
