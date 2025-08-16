@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"module": "ES2015",
+		"moduleResolution": "Node",
+		"sourceMap": false,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": true
+	},
+	"include": [],
+	"files": ["src/index.ts"]
+}
