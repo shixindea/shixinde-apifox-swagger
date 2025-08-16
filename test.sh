@@ -1,3 +1,0 @@
-clear
-
-pnpm test

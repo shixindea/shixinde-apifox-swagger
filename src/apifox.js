@@ -16,12 +16,17 @@ import * as __WEBPACK_EXTERNAL_MODULE_undici__ from "undici";
 
 // 可能的端口 - Apifox 本地客户端默认端口
 const probablePorts = [
-    4523
+    4523,
+    4524,
+    4525,
+    4526,
+    4527
 ];
 
 // 可能的主机 - 本地主机地址
 const probableHosts = [
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost'
 ];
 /**
  * 从本地 Apifox 客户端获取 Swagger 文档
@@ -29,30 +34,59 @@ const probableHosts = [
  * 该函数会尝试连接本地运行的 Apifox 客户端，通过其提供的 HTTP API 获取 OpenAPI 文档。
  * 它会遍历可能的主机和端口组合，并尝试不同的项目 ID（从 9999 开始递减）。
  * 
+ * @param {string[]} [projectIds] - 可选的项目 ID 数组，如果提供则只尝试这些 ID
  * @returns {Promise<Object|undefined>} 返回 Swagger 文档对象，如果获取失败则返回 undefined
  */
-const fetchSwaggerLocal = async ()=>{
+const fetchSwaggerLocal = async (projectIds) => {
     let swagger;
+
+    // 如果没有指定项目 ID，尝试获取所有可能的项目
+    const projectIdsToTry = projectIds && projectIds.length > 0 ? projectIds : [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+    ];
+
+    console.log(`Trying to connect to local Apifox client on hosts: ${probableHosts.join(', ')} and ports: ${probablePorts.join(', ')}`);
+
     // 遍历所有可能的主机
-    for (const host of probableHosts)
+    for (const host of probableHosts) {
         // 遍历所有可能的端口
-        for (const port of probablePorts)
-            // 尝试不同的项目 ID，从 9999 开始递减
-            for(let index = 9999; index > 0; index--)
+        for (const port of probablePorts) {
+            console.log(`Checking ${host}:${port}...`);
+
+            for (const index of projectIdsToTry) {
                 try {
                     // 构建 Apifox 本地 API 的 URL
                     const url = `http://${host}:${port}/export/openapi/${index}?version=3.0`;
-                    const response = await (0, __WEBPACK_EXTERNAL_MODULE_undici__.fetch)(url);
-                    
+                    console.log(`Trying URL: ${url}`);
+
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        timeout: 3000 // 3秒超时
+                    });
+
+                    console.log(`Response status: ${response.status}`);
+
                     // 如果请求成功，获取 Swagger 文档
                     if (200 === response.status) {
-                        console.log(`Fetched swagger from ${url}`);
+                        console.log(`Successfully fetched swagger from ${url}`);
                         swagger = await response.json();
+                        return swagger; // 找到后立即返回
                     }
-                    break;
                 } catch (error) {
-                    console.error(error);
+                    console.log(`Failed to connect to ${host}:${port}/export/openapi/${index}: ${error.message}`);
+                    // 继续尝试下一个
+                    continue;
                 }
+            }
+        }
+    }
+
+    console.log('All connection attempts failed.');
     return swagger;
 };
 /**
@@ -65,10 +99,13 @@ const fetchSwaggerLocal = async ()=>{
  * @returns {Promise<Object>} 返回 Swagger 文档对象
  * @throws {Error} 如果 APIFOX_ACCESS_TOKEN 环境变量未设置则抛出错误
  */
-const fetchSwagger = async (projectId, folderId)=>{
+const fetchSwagger = async (projectId, folderId) => {
     // 验证必需的环境变量
-    (0, __WEBPACK_EXTERNAL_MODULE_tiny_invariant__["default"])(process.env.APIFOX_ACCESS_TOKEN, 'APIFOX_ACCESS_TOKEN is required');
-    
+    (0, __WEBPACK_EXTERNAL_MODULE_tiny_invariant__["default"])(
+        // process.env.APIFOX_ACCESS_TOKEN
+        "APS-X2Qz1fqd02Thbnfj2z4Vw3nCN9z4VKEP"
+        , 'APIFOX_ACCESS_TOKEN is required');
+
     // 根据是否提供文件夹 ID 来设置导出范围
     const scope = folderId ? {
         type: 'SELECTED_FOLDERS',  // 导出指定文件夹
@@ -78,14 +115,17 @@ const fetchSwagger = async (projectId, folderId)=>{
     } : {
         type: 'ALL'  // 导出整个项目
     };
-    
+
     // 调用 Apifox API 导出 OpenAPI 文档
-    const response = await (0, __WEBPACK_EXTERNAL_MODULE_undici__.fetch)(`https://api.apifox.com/v1/projects/${projectId}/export-openapi?locale=zh-CN`, {
+    const response = await fetch(`https://api.apifox.com/v1/projects/${projectId}/export-openapi?locale=zh-CN`, {
         method: 'POST',
         headers: {
             'X-Apifox-Api-Version': '2024-03-28',  // API 版本
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.APIFOX_ACCESS_TOKEN}`  // 访问令牌
+            Authorization: `Bearer APS-X2Qz1fqd02Thbnfj2z4Vw3nCN9z4VKEP`
+
+            // ${process.env.APIFOX_ACCESS_TOKEN}
+            // `  // 访问令牌
         },
         redirect: 'follow',
         body: JSON.stringify({
@@ -115,39 +155,68 @@ const fetchSwagger = async (projectId, folderId)=>{
  * @param {string} [options.folderName] - 可选的文件夹名称，用于文件命名
  * @returns {Promise<Object>} 返回获取到的 Swagger 文档对象
  */
-const exportSwagger = async ({ projectId, outputDir, folderId, folderName })=>{
+const exportSwagger = async ({ projectId, outputDir, folderId, folderName }) => {
     // 注释：也可以从本地获取 Swagger 文档
     // const swagger = await fetchSwaggerLocal()
-    
+
     // 构建日志信息，显示导出的范围
     const folder = folderId ? `folder [${folderId}] to <${folderName}>` : 'to <all>';
     console.log(`Fetching swagger from apifox project [${projectId}] ${folder}...`);
-    
+
     // 从 Apifox 获取 Swagger 文档
     const swagger = await fetchSwagger(projectId, folderId);
-    
+
     // 构建输出文件路径
     const swaggerPath = `${outputDir}/swagger/${folderName ?? 'all'}.json`;
     const swaggerTSPath = `${outputDir}/swagger/${folderName ?? 'all'}.ts`;
-    
+
+    // 验证和修复 Swagger 文档格式
+    if (!swagger.openapi && swagger.swagger) {
+        // 如果是 Swagger 2.0 格式，转换为 OpenAPI 3.0
+        console.log('Converting Swagger 2.0 to OpenAPI 3.0 format...');
+        swagger.openapi = '3.0.0';
+        delete swagger.swagger;
+
+        // 基本的格式转换
+        if (!swagger.info) {
+            swagger.info = { title: 'API', version: '1.0.0' };
+        }
+        if (!swagger.paths) {
+            swagger.paths = {};
+        }
+    }
+
+    // 确保必要的 OpenAPI 3.x 字段存在
+    if (!swagger.openapi) {
+        swagger.openapi = '3.0.0';
+    }
+    if (!swagger.info) {
+        swagger.info = { title: 'API', version: '1.0.0' };
+    }
+    if (!swagger.paths) {
+        swagger.paths = {};
+    }
+
+    console.log(`Swagger format: ${swagger.openapi || swagger.swagger || 'unknown'}`);
+
     // 将 Swagger 文档转换为 TypeScript AST
     const ast = await (0, __WEBPACK_EXTERNAL_MODULE_openapi_typescript__["default"])(swagger, {});
-    
+
     // 确保输出目录存在
     __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].ensureDirSync(`${outputDir}/swagger`);
-    
+
     // 保存 JSON 格式的 Swagger 文档
     __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].writeJsonSync(swaggerPath, swagger, {
         spaces: 2  // 格式化 JSON，使用 2 个空格缩进
     });
-    
+
     // 保存 TypeScript 类型定义文件
     __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].writeFileSync(swaggerTSPath, (0, __WEBPACK_EXTERNAL_MODULE_openapi_typescript__.astToString)(ast));
-    
+
     // 输出成功信息
     console.log(`Exported swagger [json] to ${swaggerPath}`);
     console.log(`Exported swagger [type] to ${swaggerTSPath}`);
-    
+
     return swagger;
 };
 export { exportSwagger, fetchSwagger, fetchSwaggerLocal };
