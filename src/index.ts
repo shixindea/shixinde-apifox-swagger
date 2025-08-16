@@ -21,26 +21,26 @@ export interface ExportSwaggerOptions {
   /** Apifox 项目 ID（云端模式必需） */
   projectId?: string;
   /** 输出目录路径 */
-  outputDir: string;
+  outdir: string;
   /** 可选的文件夹 ID（仅云端模式） */
   folderId?: string;
   /** 可选的文件夹名称，用于文件命名 */
   folderName?: string;
   /** 是否从本地 Apifox 客户端获取 */
   useLocal?: boolean;
- /** 访问令牌 */
+  /** Apifox 访问令牌（云端模式必需） */
   token?: string;
 }
 
 export interface ApifoxCliOptions {
-  /** 项目 ID */
+  /** Apifox 项目 ID（云端模式必需） */
   projectId?: string;
-  /** 输出目录 */
+  /** 输出目录路径 */
   outdir: string;
-  /** 文件夹 ID */
+  /** 可选的文件夹 ID（仅云端模式） */
   folderId?: string;
-  /** 文件夹名称 */
+  /** 可选的文件夹名称，用于文件命名 */
   folderName?: string;
-  /** 是否使用本地模式 */
+  /** 是否从本地 Apifox 客户端获取 */
   local?: boolean;
 }

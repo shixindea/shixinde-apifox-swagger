@@ -1,11 +1,13 @@
 {
   "name": "@shixinde/apifox-swagger",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "袁果锅",
   "type": "module",
   "description": "从 Apifox 导出 Swagger/OpenAPI 文档并生成 TypeScript 类型定义的工具",
   "keywords": [
     "@shixinde",
+    "apifox-swagger",
+    "袁果锅",
     "apifox",
     "swagger",
     "openapi",
@@ -20,9 +22,9 @@
     "build": "./release.sh  && npm version patch && npm publish",
     "preview": "vite preview",
     "release": "./release.sh",
-    "publish": "./publish.sh",
     "docs:dev": "vuepress dev docs-vuepress",
-    "docs:build": "vuepress build docs-vuepress"
+    "docs:build": "vuepress build docs-vuepress",
+    "export-api": "node scripts/export-api.js"
   },
   "config": {
     "commitizen": {
@@ -30,7 +32,7 @@
       "czConfig": "node_modules/@shixinde/guoguo-cz/commitlint.config.cjs"
     }
   },
-  "main": "./dist/index.umd.cjs",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
@@ -39,7 +41,7 @@
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs",
+      "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     },
     "./cli": "./dist/cli.js"

@@ -27,9 +27,15 @@ pnpm add @shixinde/apifox-swagger
 
 安装后可以直接使用 `apifox-swagger` 命令：
 
-#### 从云端 API 导出
+#### 云端模式（推荐）
 
 ```bash
+# 基本用法 - 导出整个项目
+apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output
+
+# 导出指定文件夹
+apifox-swagger apifox-swagger --projectId 2364643 --folderId 123456 --folderName "用户模块" --outdir ./output
+
 # 使用 token 参数
 apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --token your-access-token
 
@@ -37,11 +43,14 @@ apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --token your
 APIFOX_ACCESS_TOKEN=your-token apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output
 ```
 
-#### 从本地客户端导出
+#### 本地模式
 
 ```bash
-# 确保 Apifox 客户端正在运行
+# 从本地 Apifox 客户端导出（需要 Apifox 客户端运行）
 apifox-swagger apifox-swagger --local --outdir ./output
+
+# 诊断本地客户端状态
+./diagnose-local.sh
 ```
 
 #### 命令行选项
@@ -141,6 +150,8 @@ APIFOX_PROJECT_ID=2364643
 - `all.json`: OpenAPI/Swagger JSON 文档
 - `all.ts`: TypeScript 类型定义文件
 
+如果指定了文件夹名称，文件名会使用文件夹名称替代 `all`。
+
 ## API 参考
 
 ### exportSwagger(options)
@@ -175,19 +186,45 @@ APIFOX_PROJECT_ID=2364643
 
 ## 故障排除
 
-### 本地客户端连接失败
+### 本地模式问题
 
-如果使用 `--local` 选项时出现连接失败：
+如果本地模式导出失败，请按以下步骤排查：
 
-1. 确保 Apifox 客户端正在运行
-2. 确保客户端中已加载项目
-3. 检查客户端是否启用了 API 服务
+1. **运行诊断脚本**：
+   ```bash
+   ./diagnose-local.sh
+   ```
 
-### 云端 API 访问失败
+2. **确保 Apifox 客户端正确配置**：
+   - Apifox 客户端正在运行
+   - 已打开至少一个项目
+   - 项目中有 API 接口定义
+   - 本地 API 服务已启用（端口 4523-4527）
 
-1. 检查访问令牌是否正确
-2. 检查项目 ID 是否正确
-3. 确保有项目的访问权限
+3. **查看详细文档**：
+   ```bash
+   cat LOCAL_USAGE.md
+   ```
+
+4. **常见解决方案**：
+   - 重启 Apifox 应用程序
+   - 确保项目中至少有一个 API 接口
+   - 检查防火墙是否阻止本地连接
+
+### 云端模式问题
+
+1. **检查访问令牌**：
+   - 确保 `APIFOX_ACCESS_TOKEN` 环境变量已设置
+   - 或使用 `--token` 参数传递令牌
+
+2. **检查项目信息**：
+   - 验证项目 ID 是否正确
+   - 确保有项目访问权限
+
+3. **网络连接**：
+    - 验证网络连接是否正常
+    - 检查是否有代理或防火墙限制
+    - 确保有项目的访问权限
 
 ### TypeScript 类型生成失败
 

@@ -152,7 +152,7 @@ const fetchSwagger = async (projectId, folderId, token) => {
  * @param {string} [options.folderName] - 可选的文件夹名称，用于文件命名
  * @returns {Promise<Object>} 返回获取到的 Swagger 文档对象
  */
-const exportSwagger = async ({ projectId, outputDir, folderId, folderName, useLocal, token }) => {
+const exportSwagger = async ({ projectId, outdir, folderId, folderName, useLocal, token }) => {
     let swagger;
     
     if (useLocal) {
@@ -171,8 +171,8 @@ const exportSwagger = async ({ projectId, outputDir, folderId, folderName, useLo
     }
 
     // 构建输出文件路径
-    const swaggerPath = `${outputDir}/swagger/${folderName ?? 'all'}.json`;
-    const swaggerTSPath = `${outputDir}/swagger/${folderName ?? 'all'}.ts`;
+    const swaggerPath = `${outdir}/swagger/${folderName ?? 'all'}.json`;
+    const swaggerTSPath = `${outdir}/swagger/${folderName ?? 'all'}.ts`;
 
     // 验证和修复 Swagger 文档格式
     if (!swagger.openapi && swagger.swagger) {
@@ -207,7 +207,7 @@ const exportSwagger = async ({ projectId, outputDir, folderId, folderName, useLo
     const ast = await (0, __WEBPACK_EXTERNAL_MODULE_openapi_typescript__["default"])(swagger, {});
 
     // 确保输出目录存在
-    __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].ensureDirSync(`${outputDir}/swagger`);
+    __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].ensureDirSync(`${outdir}/swagger`);
 
     // 保存 JSON 格式的 Swagger 文档
     __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].writeJsonSync(swaggerPath, swagger, {
