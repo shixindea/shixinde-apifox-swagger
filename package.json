@@ -17,7 +17,6 @@
     "cli"
   ],
   "scripts": {
-    "gitcz": "git-cz",
     "start": "vite",
     "build": "./release.sh  && npm version patch && npm publish",
     "preview": "vite preview",
@@ -25,12 +24,6 @@
     "docs:dev": "vuepress dev docs-vuepress",
     "docs:build": "vuepress build docs-vuepress",
     "export-api": "node scripts/export-api.js"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git",
-      "czConfig": "node_modules/@shixinde/guoguo-cz/commitlint.config.cjs"
-    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
