@@ -12,7 +12,7 @@ echo -e "${YELLOW}🚀 开始执行打包和发布流程...${NC}"
 
 # 1. 执行构建
 echo -e "${YELLOW}📦 正在执行构建...${NC}"
-vite build
+npx vite build
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}😭😭😭 构建失败！${NC}"

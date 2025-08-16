@@ -14,7 +14,7 @@ rm -rf dist
 
 # 2. 执行构建
 echo -e "${YELLOW}📦 正在执行构建...${NC}"
-vite build
+npx vite build
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}😭😭😭 构建失败！${NC}"
@@ -23,7 +23,12 @@ fi
 
 echo -e "${GREEN}✅ 构建成功！${NC}"
 
-# 3. 更新版本号
+# 3. 提交构建文件
+echo -e "${YELLOW}📝 提交构建文件...${NC}"
+git add .
+git diff --staged --quiet || git commit -m "build: 构建文件更新 $(date +%F\ %T)"
+
+# 4. 更新版本号
 echo -e "${YELLOW}🔢 更新版本号...${NC}"
 npm version patch
 
@@ -32,7 +37,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# 4. 发布到 npm
+# 5. 发布到 npm
 echo -e "${YELLOW}📤 发布到 npm...${NC}"
 npm publish
 
