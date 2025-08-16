@@ -19,6 +19,8 @@ rm -rf dist
 echo -e "${YELLOW}📦 正在执行构建...${NC}"
 npx vite build
 
+cp src/cli.js dist/cli.js
+
 if [ $? -ne 0 ]; then
     echo -e "${RED}😭😭😭 构建失败！${NC}"
     exit 1
