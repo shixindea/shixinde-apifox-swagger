@@ -17,7 +17,7 @@
   "scripts": {
     "gitcz": "git-cz",
     "start": "vite",
-    "build": "./release.sh",
+    "build": "./release.sh  && npm version patch && npm publish",
     "preview": "vite preview",
     "release": "./release.sh",
     "publish": "./publish.sh",
