@@ -528,6 +528,145 @@ function OrderComponent() {
 
 MIT
 
+## 完整使用示例
+
+以下是一个完整的使用示例，展示如何在实际项目中使用类型安全的 API 工具：
+
+```typescript
+// src/api/types.ts - 导入生成的类型
+import type { paths as UserPaths } from '../../output/swagger/all'
+
+import { 
+  makeURL, 
+  type MakeURL, 
+  type MakeRequest, 
+  type MakeResponse,
+  type InferMethodFromPaths 
+} from '@shixinde/apifox-swagger/types'
+
+// 定义具体的 API 类型
+type ClassListAPI = MakeURL<UserPaths, '/api/org/class/list', 'get'>
+type ClassCreateAPI = MakeURL<UserPaths, '/api/org/class/create', 'post'>
+type ClassUpdateAPI = MakeURL<UserPaths, '/api/org/class/update', 'put'>
+
+// 创建类型安全的 URL
+const classListUrl = makeURL<UserPaths, '/api/org/class/list', 'get'>('/api/org/class/list', 'get')
+const classCreateUrl = makeURL<UserPaths, '/api/org/class/create', 'post'>('/api/org/class/create', 'post')
+const classUpdateUrl = makeURL<UserPaths, '/api/org/class/update', 'put'>('/api/org/class/update', 'put')
+
+// 通用 API 调用函数
+function apiCall<
+  U extends keyof UserPaths,
+  M extends InferMethodFromPaths<UserPaths, U>
+>(
+  url: U,
+  method: M,
+  data?: MakeRequest<UserPaths, U, M>
+): Promise<MakeResponse<UserPaths, U, M>> {
+  const baseURL = 'https://api.example.com'
+  
+  return fetch(`${baseURL}${url}`, {
+    method: method as string,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`
+    },
+    body: data?.jsonData ? JSON.stringify(data.jsonData) : undefined,
+  }).then(res => {
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: ${res.statusText}`)
+    }
+    return res.json()
+  })
+}
+
+// 具体的 API 调用函数
+export const classAPI = {
+  // 获取班级列表
+  async getList(params?: MakeRequest<UserPaths, '/api/org/class/list', 'get'>['query']) {
+    return apiCall('/api/org/class/list', 'get', { query: params })
+  },
+  
+  // 创建班级
+  async create(data: MakeRequest<UserPaths, '/api/org/class/create', 'post'>['jsonData']) {
+    return apiCall('/api/org/class/create', 'post', { jsonData: data })
+  },
+  
+  // 更新班级
+  async update(
+    id: string, 
+    data: MakeRequest<UserPaths, '/api/org/class/update', 'put'>['jsonData']
+  ) {
+    return apiCall('/api/org/class/update', 'put', { 
+      pathParams: { id },
+      jsonData: data 
+    })
+  }
+}
+
+// React Hook 示例
+import { useState, useEffect } from 'react'
+
+export function useClassList(params?: MakeRequest<UserPaths, '/api/org/class/list', 'get'>['query']) {
+  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState<MakeResponse<UserPaths, '/api/org/class/list', 'get'> | null>(null)
+  const [error, setError] = useState<Error | null>(null)
+
+  useEffect(() => {
+    setLoading(true)
+    classAPI.getList(params)
+      .then(setData)
+      .catch(setError)
+      .finally(() => setLoading(false))
+  }, [params])
+
+  return { loading, data, error, refetch: () => classAPI.getList(params) }
+}
+
+// 在组件中使用
+function ClassListComponent() {
+  const { loading, data, error } = useClassList({ page: 1, size: 10 })
+  
+  const handleCreate = async (formData: any) => {
+    try {
+      await classAPI.create({
+        name: formData.name,
+        description: formData.description
+        // TypeScript 会提供完整的类型提示
+      })
+      // 重新获取列表
+    } catch (err) {
+      console.error('创建失败:', err)
+    }
+  }
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error.message}</div>
+  
+  return (
+    <div>
+      {data?.list?.map(item => (
+        <div key={item.id}>
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// 工具函数
+function getToken(): string {
+  return localStorage.getItem('token') || ''
+}
+```
+
 ## 贡献
 
 欢迎提交 Issue 和 Pull Request！
+
+
+
+
+
+
