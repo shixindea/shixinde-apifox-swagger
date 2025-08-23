@@ -153,7 +153,7 @@ export default {
 
 - [Vue3 组件库 Element ProMax](https://shixindea.github.io/element-promax-docs/en-US/)
 - [Git 提交规范 Guoguo-cz](https://www.npmjs.com/package/@shixinde/guoguo-cz)
-- [JavaScript 工具类 Guoguo-utils](https://shixindea.github.io/shixinde-utils/)
+- [JavaScript 工具类 Guoguo-utils](https://shixindea.github.io/shixinde-apifox-swagger/)
 - [vuepress 快速模板 Guoguo-vuepress](https://www.npmjs.com/package/@shixinde/vuepress-theme-init)
 - [个人笔记 guoguo-notes](https://www.npmjs.com/package/@shixinde/vuepress-theme-init)
 - [api 文档生成工具 apifox-swagger](https://www.npmjs.com/package/@shixinde/apifox-swagger)

@@ -17,7 +17,7 @@
     "cli"
   ],
   "scripts": {
-    "start": "vite",
+    "start": "vuepress dev docs-vuepress",
     "build": "./release.sh  && npm version patch && npm publish",
     "preview": "vite preview",
     "release": "./release.sh",

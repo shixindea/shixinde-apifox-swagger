@@ -1,1 +1,1 @@
-export const siteData = JSON.parse("{\"base\":\"/shixinde-utils/\",\"lang\":\"zh-CN\",\"title\":\"@shixinde/apifox-swagger\",\"description\":\"袁果锅开发工具类\",\"head\":[[\"link\",{\"rel\":\"icon\",\"href\":\"/favicon.ico\"}]],\"locales\":{}}")
+export const siteData = JSON.parse("{\"base\":\"/shixinde-apifox-swagger/\",\"lang\":\"zh-CN\",\"title\":\"@shixinde/apifox-swagger\",\"description\":\"袁果锅开发工具类\",\"head\":[[\"link\",{\"rel\":\"icon\",\"href\":\"/favicon.ico\"}]],\"locales\":{}}")

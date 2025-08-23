@@ -9,7 +9,7 @@ export default defineUserConfig({
     "description": "袁果锅开发工具类",
     port: '6688', //端口号
     "dest": "docs",
-    base:"/shixinde-utils/",
+    base:"/shixinde-apifox-swagger/",
     head: [
         [
             "link",
@@ -33,12 +33,23 @@ export default defineUserConfig({
     //     },
     // },
 
-    bundler: viteBundler(),
+    bundler: viteBundler({
+        viteOptions: {
+            css: {
+                preprocessorOptions: {
+                    scss: {
+                        // 抑制 Sass 弃用警告
+                        silenceDeprecations: ['legacy-js-api', 'mixed-decls']
+                    }
+                }
+            }
+        }
+    }),
     theme: defaultTheme({
         // 以下所有配置写在这里！！！
         locales: {
             '/': {
-                repo: 'https://github.com/shixindea/shixinde-utils',
+                repo: 'https://github.com/shixindea/shixinde-apifox-swagger',
                 selectLanguageName: '简体中文',
                 selectLanguageText: '选择语言',
                 navbar: zhNavbar,
@@ -49,7 +60,7 @@ export default defineUserConfig({
 
             },
             '/en/': {
-                repo: 'https://github.com/shixindea/shixinde-utils',
+                repo: 'https://github.com/shixindea/shixinde-apifox-swagger',
                 selectLanguageName: 'English',
                 selectLanguageText: 'Language',
                 navbar: enNavbar,
