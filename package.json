@@ -37,7 +37,12 @@
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     },
-    "./cli": "./dist/cli.js"
+    "./cli": "./dist/cli.js",
+    "./types": {
+      "import": "./dist/types-template.js",
+      "require": "./dist/types-template.cjs",
+      "types": "./dist/types-template.d.ts"
+    }
   },
   "repository": {
     "type": "git",

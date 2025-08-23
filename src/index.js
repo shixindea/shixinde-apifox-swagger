@@ -12,6 +12,7 @@ const initCommandApifox = (cli) => {
         .option('--folderName <folderName>', 'The folder name of the apifox')
         .option('--local', 'Fetch from local Apifox client instead of cloud API')
         .option('--token <token>', 'Apifox access token (alternative to APIFOX_ACCESS_TOKEN env var)')
+        .option('--types', 'Generate types folder with makeURL function for type-safe API usage')
         .action(async (options) => {
             console.log('options ===>',options);
             
@@ -28,11 +29,12 @@ const initCommandApifox = (cli) => {
             const { exportSwagger } = await import("./apifox.js");
             await exportSwagger({
                 projectId: options.projectId,
-                outputDir: options.outdir,
+                outdir: options.outdir,
                 folderId: options.folderId,
                 folderName: options.folderName,
                 useLocal: options.local,
                 token: token,
+                generateTypes: options.types,
             });
         });
 };

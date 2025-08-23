@@ -1,0 +1,1668 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OMO-系统",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/api/org/class/list": {
+      "get": {
+        "summary": "获取报班班级列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "basic",
+            "in": "query",
+            "description": "必传，默认传这个值，不要改",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgClassName",
+            "in": "query",
+            "description": "搜索机构",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isFull",
+            "in": "query",
+            "description": "0： 未满班，否则不传",
+            "required": false,
+            "example": "0",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "futureClass",
+            "in": "query",
+            "description": "0： 已开班，1：未开班，否则不传",
+            "required": false,
+            "example": "0",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "orgClassId": {
+                            "description": "班级id",
+                            "type": "string"
+                          },
+                          "orgClassName": {
+                            "description": "班级名称",
+                            "type": "string"
+                          },
+                          "capacity": {
+                            "description": "满班人数",
+                            "type": "integer"
+                          },
+                          "inClassCount": {
+                            "description": "在班人数",
+                            "type": "integer"
+                          },
+                          "subOrgName": {
+                            "description": "所属机构",
+                            "type": "string"
+                          },
+                          "teacherName": {
+                            "description": "班主任",
+                            "type": "string"
+                          },
+                          "course": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "课程id",
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "课程名称",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "description": "课程信息"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": [
+                    {
+                      "orgClassId": "68661f43a113f921d46c39fb",
+                      "orgClassName": "崔茉莉管理班级",
+                      "capacity": 5,
+                      "inClassCount": 9,
+                      "subOrgName": "B校区",
+                      "teacherName": "崔茉莉",
+                      "course": {
+                        "id": "6852945befbe5e7caa25a246",
+                        "name": "暑假半天托育"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/potential/user/list": {
+      "get": {
+        "summary": "获取潜客列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "  page",
+            "in": "query",
+            "description": "分页",
+            "required": false,
+            "example": " 0",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "  pageSize",
+            "in": "query",
+            "description": "分页大小",
+            "required": false,
+            "example": " 0",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "  nickname",
+            "in": "query",
+            "description": "潜客昵称",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "  cellphone",
+            "in": "query",
+            "description": "潜客手机号",
+            "required": false,
+            "example": "15910291234",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "count": {
+                          "type": "integer"
+                        },
+                        "pageSize": {
+                          "type": "integer"
+                        },
+                        "hasNext": {
+                          "type": "boolean"
+                        },
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "潜客id",
+                                "type": "string"
+                              },
+                              "nickname": {
+                                "description": "潜客名",
+                                "type": "string"
+                              },
+                              "cellphone": {
+                                "description": "潜客手机号",
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "currentPage",
+                        "totalPages",
+                        "count",
+                        "pageSize",
+                        "hasNext",
+                        "list"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": {
+                    "currentPage": 1,
+                    "totalPages": 1,
+                    "count": 1,
+                    "pageSize": 10,
+                    "hasNext": false,
+                    "list": [
+                      {
+                        "id": "685289e0efbe5e7caa25a240",
+                        "nickname": "周杰伦",
+                        "cellphone": "13822223339"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/course/order/pre/info/{orgClassId}": {
+      "get": {
+        "summary": "获取班级关联的课程的基本信息",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "orgClassId",
+            "in": "path",
+            "description": "班级id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "courseId": {
+                          "type": "string"
+                        },
+                        "courseName": {
+                          "description": "课程id",
+                          "type": "string"
+                        },
+                        "courseSellType": {
+                          "description": "售卖方式",
+                          "type": "string"
+                        },
+                        "sellPlanList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "createDate": {
+                                "type": "string"
+                              },
+                              "updateDate": {
+                                "type": "null"
+                              },
+                              "status": {
+                                "type": "integer"
+                              },
+                              "planId": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "售卖计划名称",
+                                "type": "string"
+                              },
+                              "lessonCount": {
+                                "description": "总课时数",
+                                "type": "integer"
+                              },
+                              "price": {
+                                "description": "总价格(分)",
+                                "type": "integer"
+                              },
+                              "lessonPrice": {
+                                "description": "课时单价",
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "description": "售卖计划"
+                        },
+                        "orgClass": {
+                          "type": "object",
+                          "properties": {
+                            "orgClassId": {
+                              "description": "班级id",
+                              "type": "string"
+                            },
+                            "orgClassName": {
+                              "description": "班级名称",
+                              "type": "string"
+                            },
+                            "capacity": {
+                              "description": "满班人数",
+                              "type": "integer"
+                            },
+                            "inClassCount": {
+                              "description": "在班人数",
+                              "type": "integer"
+                            },
+                            "subOrgName": {
+                              "description": "所属校区",
+                              "type": "string"
+                            },
+                            "teacherName": {
+                              "description": "班主任",
+                              "type": "string"
+                            },
+                            "course": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "description": "关联的omo课程信息"
+                            }
+                          },
+                          "required": [
+                            "orgClassId",
+                            "orgClassName",
+                            "capacity",
+                            "inClassCount",
+                            "subOrgName",
+                            "teacherName",
+                            "course"
+                          ],
+                          "description": "班级信息"
+                        }
+                      },
+                      "required": [
+                        "courseId",
+                        "courseName",
+                        "courseSellType",
+                        "sellPlanList",
+                        "orgClass"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": {
+                    "courseId": "6852945befbe5e7caa25a246",
+                    "courseName": "暑假半天托育",
+                    "courseSellType": "by_lesson",
+                    "sellPlanList": [
+                      {
+                        "createDate": "2025-06-18 18:26:35",
+                        "updateDate": null,
+                        "status": 1,
+                        "planId": "6852945befbe5e7caa25a244",
+                        "name": "暑假",
+                        "lessonCount": 100,
+                        "price": 1000000,
+                        "lessonPrice": 10000
+                      }
+                    ],
+                    "orgClass": {
+                      "orgClassId": "68661f43a113f921d46c39fb",
+                      "orgClassName": "崔茉莉管理班级",
+                      "capacity": 5,
+                      "inClassCount": 9,
+                      "subOrgName": "B校区",
+                      "teacherName": "崔茉莉",
+                      "course": {
+                        "id": "6852945befbe5e7caa25a246",
+                        "name": "暑假半天托育"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/course/order/new": {
+      "post": {
+        "summary": "创建购买订单",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "description": "用户id",
+                    "type": "string"
+                  },
+                  "orgClassId": {
+                    "description": "选择要进入的班级",
+                    "type": "string"
+                  },
+                  "subOrderDTO": {
+                    "type": "object",
+                    "properties": {
+                      "courseId": {
+                        "description": "课程id",
+                        "type": "string"
+                      },
+                      "sellPlanId": {
+                        "description": "售卖计划",
+                        "type": "string"
+                      },
+                      "lessonCount": {
+                        "description": "购买的课时数",
+                        "type": "integer"
+                      },
+                      "discounts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "discountType": {
+                              "description": "打折类型，默认是扣减",
+                              "type": "string"
+                            },
+                            "amount": {
+                              "description": "扣减金额(分)",
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "description": "打折信息，可以为空数组"
+                      }
+                    },
+                    "required": [
+                      "courseId",
+                      "sellPlanId",
+                      "lessonCount",
+                      "discounts"
+                    ],
+                    "description": "订单信息"
+                  },
+                  "ownerId": {
+                    "description": "业绩归属人",
+                    "type": "string"
+                  },
+                  "comment": {
+                    "description": "备注",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "userId",
+                  "orgClassId",
+                  "subOrderDTO",
+                  "ownerId",
+                  "comment"
+                ]
+              },
+              "example": "{\n  \"userId\": \"\", // 用户id\n  \"orgClassId\": \"\", // 选择要进入的班级\n  \"subOrderDTO\": { // 订单信息\n    \"courseId\": \"\", // 课程id\n    \"sellPlanId\": \"\", // 售卖计划\n    \"lessonCount\": 0, // 购买的课时数\n    \"discounts\": [ // 打折信息，可以为空数组\n      {\n        \"discountType\": \"deduction\", // 打折类型，默认是扣减\n        \"amount\": 0 // 扣减金额(分)\n      }\n    ]\n  },\n  \"ownerId\": \"\", // 业绩归属人\n  \"comment\": \"comment_993d6276a0df\" // 备注\n}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "orderId": {
+                          "description": "订单id",
+                          "type": "string"
+                        },
+                        "payKey": {
+                          "description": "分享转发出去的消息",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "orderId",
+                        "payKey"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": {
+                    "orderId": "687e10f091e4463f843ec0a3",
+                    "payKey": "orderId=687e10f091e4463f843ec0a3&ts=1753092336599&tk=1679f4860c4ed1658a076ceb913e20c0"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/course/order/list": {
+      "get": {
+        "summary": "获取订单列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "  page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "0 ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "  pageSize",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "0 ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "  userSearch",
+            "in": "query",
+            "description": "搜索用户关键字",
+            "required": false,
+            "example": "userSearch_de9fac9ae4ff ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "  payStatus",
+            "in": "query",
+            "description": "待支付: pending; 已支付: paid; 已取消: cancelled;",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "count": {
+                          "type": "integer"
+                        },
+                        "pageSize": {
+                          "type": "integer"
+                        },
+                        "hasNext": {
+                          "type": "boolean"
+                        },
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "orderNumber": {
+                                "description": "订单编号",
+                                "type": "string"
+                              },
+                              "payStatus": {
+                                "description": "支付状态",
+                                "type": "string"
+                              },
+                              "finalAmount": {
+                                "description": "订单金额",
+                                "type": "integer"
+                              },
+                              "paidAmount": {
+                                "description": "实付金额",
+                                "type": "null"
+                              },
+                              "courses": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "description": "课程信息"
+                              },
+                              "user": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "cellphone": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "name",
+                                  "cellphone"
+                                ],
+                                "description": "用户信息"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "currentPage",
+                        "totalPages",
+                        "count",
+                        "pageSize",
+                        "hasNext",
+                        "list"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": {
+                    "currentPage": 1,
+                    "totalPages": 3,
+                    "count": 28,
+                    "pageSize": 10,
+                    "hasNext": true,
+                    "list": [
+                      {
+                        "orderNumber": "MC20250721182958843187968",
+                        "payStatus": "pending",
+                        "finalAmount": 99990,
+                        "paidAmount": null,
+                        "courses": [
+                          {
+                            "id": "6852945befbe5e7caa25a246",
+                            "name": "暑假半天托育"
+                          }
+                        ],
+                        "user": {
+                          "name": "周杰伦",
+                          "cellphone": "13822223339"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/course/order/{omoCourseOrderId}/details": {
+      "get": {
+        "summary": "获取订单详情",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "omoCourseOrderId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "createDate": {
+                          "description": "经办日期",
+                          "type": "string"
+                        },
+                        "id": {
+                          "description": "订单id",
+                          "type": "string"
+                        },
+                        "orderNumber": {
+                          "description": "订单号",
+                          "type": "string"
+                        },
+                        "organizationId": {
+                          "type": "string"
+                        },
+                        "potentialUserId": {
+                          "type": "string"
+                        },
+                        "payOnline": {
+                          "description": "是否是线上支付",
+                          "type": "boolean"
+                        },
+                        "omoPayWay": {
+                          "description": "支付方式",
+                          "type": "string"
+                        },
+                        "payDate": {
+                          "description": "支付日期",
+                          "type": "null"
+                        },
+                        "subOrders": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "orderId": {
+                                "type": "string"
+                              },
+                              "courseId": {
+                                "type": "string"
+                              },
+                              "course": {
+                                "type": "null"
+                              },
+                              "sellPlanId": {
+                                "type": "string"
+                              },
+                              "lessonCount": {
+                                "description": "购买的总课时数",
+                                "type": "integer"
+                              },
+                              "lessonPrice": {
+                                "description": "课时单价",
+                                "type": "integer"
+                              },
+                              "planAmount": {
+                                "description": "原始价格",
+                                "type": "integer"
+                              },
+                              "discounts": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "discountType": {
+                                      "description": "折扣类型",
+                                      "type": "string"
+                                    },
+                                    "amount": {
+                                      "description": "抵扣金额(分)",
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "description": "折扣信息"
+                              },
+                              "discountAmount": {
+                                "description": "最终抵扣金额",
+                                "type": "integer"
+                              },
+                              "orgClassId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "description": "子订单信息"
+                        },
+                        "finalAmount": {
+                          "description": "最终价格",
+                          "type": "integer"
+                        },
+                        "paidAmount": {
+                          "description": "实付金额",
+                          "type": "null"
+                        },
+                        "creatorId": {
+                          "type": "string"
+                        },
+                        "ownerId": {
+                          "type": "string"
+                        },
+                        "attachments": {
+                          "description": "上传的支付凭证",
+                          "type": "null"
+                        },
+                        "orderChannel": {
+                          "type": "string"
+                        },
+                        "orderStatus": {
+                          "type": "null"
+                        },
+                        "payStatus": {
+                          "description": "支付状态",
+                          "type": "string"
+                        },
+                        "comment": {
+                          "description": "备注",
+                          "type": "string"
+                        },
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "description": "学员名称",
+                              "type": "string"
+                            },
+                            "cellphone": {
+                              "description": "学员手机号",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "name",
+                            "cellphone"
+                          ],
+                          "description": "学员信息"
+                        },
+                        "owner": {
+                          "description": "业绩归属人信息",
+                          "type": "null"
+                        },
+                        "organizationClassSimple": {
+                          "type": "object",
+                          "properties": {
+                            "orgClassId": {
+                              "type": "string"
+                            },
+                            "orgClassName": {
+                              "description": "班级名称",
+                              "type": "string"
+                            },
+                            "capacity": {
+                              "type": "integer"
+                            },
+                            "inClassCount": {
+                              "type": "integer"
+                            },
+                            "subOrgName": {
+                              "description": "校区",
+                              "type": "string"
+                            },
+                            "teacherName": {
+                              "description": "班主任",
+                              "type": "string"
+                            },
+                            "course": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "description": "课程信息"
+                            }
+                          },
+                          "required": [
+                            "orgClassId",
+                            "orgClassName",
+                            "capacity",
+                            "inClassCount",
+                            "subOrgName",
+                            "teacherName",
+                            "course"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "createDate",
+                        "id",
+                        "orderNumber",
+                        "organizationId",
+                        "potentialUserId",
+                        "payOnline",
+                        "omoPayWay",
+                        "payDate",
+                        "subOrders",
+                        "finalAmount",
+                        "paidAmount",
+                        "creatorId",
+                        "ownerId",
+                        "attachments",
+                        "orderChannel",
+                        "orderStatus",
+                        "payStatus",
+                        "comment",
+                        "user",
+                        "owner",
+                        "organizationClassSimple"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": {
+                    "createDate": "2025-07-21 18:29:58",
+                    "id": "687e16a691e44642e976fe2a",
+                    "orderNumber": "MC20250721182958843187968",
+                    "organizationId": "658aadeb84b5c0275b00e25c",
+                    "potentialUserId": "685289e0efbe5e7caa25a240",
+                    "payOnline": true,
+                    "omoPayWay": "wxpay_api",
+                    "payDate": null,
+                    "subOrders": [
+                      {
+                        "orderId": "687e16a691e44642e976fe2b",
+                        "courseId": "6852945befbe5e7caa25a246",
+                        "course": null,
+                        "sellPlanId": "6852945befbe5e7caa25a244",
+                        "lessonCount": 10,
+                        "lessonPrice": 10000,
+                        "planAmount": 100000,
+                        "discounts": [
+                          {
+                            "discountType": "deduction",
+                            "amount": 10
+                          }
+                        ],
+                        "discountAmount": 10,
+                        "orgClassId": "68661f43a113f921d46c39fb"
+                      }
+                    ],
+                    "finalAmount": 99990,
+                    "paidAmount": null,
+                    "creatorId": "6862561a1f1f5245898fb212",
+                    "ownerId": "6862561a1f1f5245898fb212",
+                    "attachments": null,
+                    "orderChannel": "mini_program",
+                    "orderStatus": null,
+                    "payStatus": "pending",
+                    "comment": "comment_0a3e36ad29fa",
+                    "user": {
+                      "name": "周杰伦",
+                      "cellphone": "13822223339"
+                    },
+                    "owner": null,
+                    "organizationClassSimple": {
+                      "orgClassId": "68661f43a113f921d46c39fb",
+                      "orgClassName": "崔茉莉管理班级",
+                      "capacity": 5,
+                      "inClassCount": 9,
+                      "subOrgName": "B校区",
+                      "teacherName": "崔茉莉",
+                      "course": {
+                        "id": "6852945befbe5e7caa25a246",
+                        "name": "暑假半天托育"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/course/order/pre/create/{omoCourseOrderId}": {
+      "post": {
+        "summary": "获取微信小程序支付参数",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "omoCourseOrderId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transferKey": {
+                    "description": "分享返回的key",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "transferKey"
+                ]
+              },
+              "example": "{\n  \"transferKey\": \"transferKey_b8860fb39c24\" // 分享返回的key\n}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "appId": {
+                          "type": "string"
+                        },
+                        "nonceStr": {
+                          "type": "string"
+                        },
+                        "signType": {
+                          "type": "string"
+                        },
+                        "timeStamp": {
+                          "type": "string"
+                        },
+                        "orderId": {
+                          "type": "string"
+                        },
+                        "codeUrl": {
+                          "type": "null"
+                        },
+                        "price": {
+                          "type": "integer"
+                        },
+                        "partnerId": {
+                          "type": "null"
+                        },
+                        "paySign": {
+                          "type": "string"
+                        },
+                        "package": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "appId",
+                        "nonceStr",
+                        "signType",
+                        "timeStamp",
+                        "orderId",
+                        "codeUrl",
+                        "price",
+                        "partnerId",
+                        "paySign",
+                        "package"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": {
+                    "appId": "wxfde4e8f0ae407c3c",
+                    "nonceStr": "oInJdLJ4fxBzoqwv",
+                    "signType": "MD5",
+                    "timeStamp": "1753095669",
+                    "orderId": "687e1df491e44645e58a7c16",
+                    "codeUrl": null,
+                    "price": 99990,
+                    "partnerId": null,
+                    "paySign": "0B278A81B7A09B5EAA7196F7819B9480",
+                    "package": "prepay_id=wx211901089523009078927b570001820000"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/course/order/transfer/{omoCourseOrderId}": {
+      "get": {
+        "summary": "获取转赠订单参数",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "omoCourseOrderId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "orderId": {
+                      "description": "订单id",
+                      "type": "string"
+                    },
+                    "payKey": {
+                      "description": "转赠参数",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "orderId",
+                    "payKey"
+                  ]
+                },
+                "example": {
+                  "orderId": "",
+                  "payKey": "payKey_bcbb8bcfe38b"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/course/order/transfer/accept": {
+      "post": {
+        "summary": "接收转赠的订单",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "transferKey": {
+                    "description": "其他接口获取的转赠key",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "transferKey"
+                ]
+              },
+              "example": "{\n  \"transferKey\": \"\" // 其他接口获取的转赠key\n}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/teacher/pages": {
+      "get": {
+        "summary": "获取业绩归属人列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "搜索老师的关键字",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "currentPage": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        },
+                        "count": {
+                          "type": "integer"
+                        },
+                        "pageSize": {
+                          "type": "integer"
+                        },
+                        "hasNext": {
+                          "type": "boolean"
+                        },
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "teacherId": {
+                                "description": "归属人id",
+                                "type": "string"
+                              },
+                              "teacherName": {
+                                "description": "归属人名称",
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "currentPage",
+                        "totalPages",
+                        "count",
+                        "pageSize",
+                        "hasNext",
+                        "list"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": {
+                    "currentPage": 1,
+                    "totalPages": 1,
+                    "count": 1,
+                    "pageSize": 10,
+                    "hasNext": false,
+                    "list": [
+                      {
+                        "teacherId": "669f0c64daecfd5cf524cb57",
+                        "teacherName": "安程"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/potential/user/update": {
+      "post": {
+        "summary": "更新潜客基本信息",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "description": "潜客id",
+                    "type": "string"
+                  },
+                  "nickname": {
+                    "description": "潜客名称",
+                    "type": "string"
+                  },
+                  "cellphone": {
+                    "description": "潜客手机号",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "userId",
+                  "nickname",
+                  "cellphone"
+                ]
+              },
+              "example": "{\n  \"userId\": \"\", // 潜客id\n  \"nickname\": \"nickname_82b6fcbc748a\", // 潜客名称\n  \"cellphone\": \"cellphone_92a0a9433fb0\" // 潜客手机号\n}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/classes/future/{orgClassId}": {
+      "get": {
+        "summary": "获取指定班级未来的课表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "orgClassId",
+            "in": "path",
+            "description": "班级id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "classesId": {
+                            "description": "班级id",
+                            "type": "string"
+                          },
+                          "startTime": {
+                            "description": "开始时间",
+                            "type": "string"
+                          },
+                          "capacity": {
+                            "description": "满班人数",
+                            "type": "integer"
+                          },
+                          "userCount": {
+                            "description": "在班人数",
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "msg",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "code": 1,
+                  "msg": "success",
+                  "data": [
+                    {
+                      "classesId": "68a58d22030a3b625b31b430",
+                      "startTime": "2025-08-25 12:00:00",
+                      "capacity": 0,
+                      "userCount": 0
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/omo/course/order/{courseOrderId}/cancel": {
+      "delete": {
+        "summary": "取消订单",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "courseOrderId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "webhooks": {},
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}

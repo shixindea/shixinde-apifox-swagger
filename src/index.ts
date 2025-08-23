@@ -30,6 +30,8 @@ export interface ExportSwaggerOptions {
   useLocal?: boolean;
   /** Apifox 访问令牌（云端模式必需） */
   token?: string;
+  /** 是否生成 types 文件夹和类型安全的 API 工具 */
+  generateTypes?: boolean;
 }
 
 export interface ApifoxCliOptions {

@@ -39,8 +39,11 @@ apifox-swagger apifox-swagger --projectId 2364643 --folderId 123456 --folderName
 # 使用 token 参数
 apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --token your-access-token
 
+# 生成类型安全的 API 工具
+apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --types
+
 # 或使用环境变量
-APIFOX_ACCESS_TOKEN=your-token apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output
+APIOFX_ACCESS_TOKEN=your-token apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --types
 ```
 
 <!-- #### 本地模式（）
@@ -61,6 +64,7 @@ apifox-swagger apifox-swagger --local --outdir ./output
 - `--local`: 从本地 Apifox 客户端导出
 - `--folderId <folderId>`: 指定文件夹 ID
 - `--folderName <folderName>`: 指定文件夹名称
+- `--types`: 生成类型安全的 API 工具（生成 types 文件夹）
 
 ### 2. 编程接口
 
@@ -75,6 +79,15 @@ const result = await exportSwagger({
   token: 'your-access-token',
   outdir: './output',
   useLocal: false
+});
+
+// 从云端导出并生成类型文件
+const result = await exportSwagger({
+  projectId: '2364643',
+  token: 'your-access-token',
+  outdir: './output',
+  useLocal: false,
+  generateTypes: true
 });
 
 // 从本地客户端导出
@@ -150,6 +163,10 @@ APIFOX_PROJECT_ID=2364643
 - `all.json`: OpenAPI/Swagger JSON 文档
 - `all.ts`: TypeScript 类型定义文件
 
+如果启用了 `--types` 选项或 `generateTypes: true`，还会创建 `types` 文件夹，包含：
+
+- `index.ts`: 类型安全的 API 工具，包含 `makeURL` 函数和相关类型定义
+
 如果指定了文件夹名称，文件名会使用文件夹名称替代 `all`。
 
 ## API 参考
@@ -166,6 +183,7 @@ APIFOX_PROJECT_ID=2364643
 - `options.useLocal` (boolean): 是否使用本地客户端（默认：false）
 - `options.folderId` (string): 文件夹 ID（可选）
 - `options.folderName` (string): 文件夹名称（可选）
+- `options.generateTypes` (boolean): 是否生成类型安全的 API 工具（默认：false）
 
 #### 返回值
 
@@ -230,6 +248,141 @@ APIFOX_PROJECT_ID=2364643
 
 1. 检查 OpenAPI 文档格式是否正确
 2. 确保安装了所有必需的依赖
+
+## 类型安全的 API 工具
+
+### 功能介绍
+
+通过 `--types` 选项或 `generateTypes: true` 参数，工具会生成类型安全的 API 工具，让你可以：
+
+- 🔒 **类型安全**：自动推断请求参数和响应数据的类型
+- 🚀 **智能提示**：IDE 中获得完整的类型提示和自动补全
+- 🛡️ **编译时检查**：在编译阶段发现类型错误，避免运行时问题
+- 📝 **自动文档**：类型即文档，无需额外维护
+
+### 基本用法
+
+```bash
+# 生成类型文件
+apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --types
+```
+
+```typescript
+// 导入类型工具
+import { makeURL, type MakeURL } from './output/types/index'
+
+// 创建类型安全的 URL
+const orderUrl = makeURL('/api/omo/course/order/new', 'post')
+
+// 提取类型信息
+type OrderAPI = MakeURL<(typeof orderUrl)[0], (typeof orderUrl)[1]>
+type RequestData = OrderAPI['jsonData']     // 请求体类型
+type ResponseData = OrderAPI['responseData'] // 响应体类型
+type QueryParams = OrderAPI['query']        // 查询参数类型
+type PathParams = OrderAPI['pathParams']    // 路径参数类型
+```
+
+### 高级用法
+
+#### 1. 创建类型安全的 API 客户端
+
+```typescript
+import { makeURL, type MakeRequest, type MakeResponse, type InferMethodFromPaths, type paths } from './output/types/index'
+
+// 通用 API 调用函数
+function apiCall<
+  U extends keyof paths,
+  M extends InferMethodFromPaths<U>
+>(
+  url: U,
+  method: M,
+  data?: MakeRequest<U, M>
+): Promise<MakeResponse<U, M>> {
+  // 实现 API 调用逻辑
+  return fetch(url, {
+    method: method as string,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: data?.jsonData ? JSON.stringify(data.jsonData) : undefined,
+  }).then(res => res.json())
+}
+
+// 使用示例
+async function createOrder() {
+  const result = await apiCall('/api/omo/course/order/new', 'post', {
+    jsonData: {
+      // 这里会有完整的类型提示
+      courseId: '123',
+      quantity: 1
+    }
+  })
+  
+  // result 也有正确的类型
+  console.log(result.orderId)
+}
+```
+
+#### 2. React Hook 集成
+
+```typescript
+import { useState, useEffect } from 'react'
+import { makeURL, type MakeRequest, type MakeResponse } from './output/types/index'
+
+function useAPI<U extends keyof paths, M extends InferMethodFromPaths<U>>(
+  url: U,
+  method: M,
+  data?: MakeRequest<U, M>
+) {
+  const [loading, setLoading] = useState(false)
+  const [result, setResult] = useState<MakeResponse<U, M> | null>(null)
+  const [error, setError] = useState<Error | null>(null)
+
+  useEffect(() => {
+    setLoading(true)
+    apiCall(url, method, data)
+      .then(setResult)
+      .catch(setError)
+      .finally(() => setLoading(false))
+  }, [url, method, data])
+
+  return { loading, result, error }
+}
+
+// 在组件中使用
+function OrderComponent() {
+  const { loading, result, error } = useAPI('/api/omo/course/order/list', 'get', {
+    query: { page: 1, size: 10 }
+  })
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error.message}</div>
+  
+  return (
+    <div>
+      {result?.orders.map(order => (
+        <div key={order.id}>{order.title}</div>
+      ))}
+    </div>
+  )
+}
+```
+
+### 类型说明
+
+- **`makeURL(url, method)`**: 创建类型安全的 URL 和方法组合
+- **`MakeURL<U, M>`**: 包含完整 API 信息的类型，包括请求参数和响应数据
+- **`MakeRequest<U, M>`**: 请求参数类型，包括 query、pathParams、formData、jsonData
+- **`MakeResponse<U, M>`**: 响应数据类型
+- **`InferMethodFromPaths<U>`**: 从路径推断可用的 HTTP 方法
+- **`paths`**: 所有 API 路径的类型定义
+
+### 最佳实践
+
+1. **统一的 API 客户端**：创建一个统一的 API 调用函数，所有接口调用都通过它进行
+2. **类型复用**：将常用的类型定义导出，在多个文件中复用
+3. **错误处理**：结合 TypeScript 的联合类型，优雅地处理 API 错误
+4. **自动更新**：将类型生成集成到构建流程中，确保类型定义始终是最新的
 
 ## 许可证
 

@@ -14,9 +14,12 @@ export default defineConfig({
 	build: {
 		outDir: 'dist',
 		lib: {
-			entry: path.resolve(__dirname, 'src/index.ts'),
+			entry: {
+				index: path.resolve(__dirname, 'src/index.ts'),
+				'types-template': path.resolve(__dirname, 'src/types-template.ts')
+			},
 			formats: ['es', 'cjs'],
-			fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`
+			fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`
 		},
 		rollupOptions: {
 			// 确保外部化处理那些你不想打包进库的依赖
