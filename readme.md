@@ -260,6 +260,26 @@ APIFOX_PROJECT_ID=2364643
 - 🛡️ **编译时检查**：在编译阶段发现类型错误，避免运行时问题
 - 📝 **自动文档**：类型即文档，无需额外维护
 
+### 配置类型导出
+
+在项目根目录创建 `apifox.config.js` 配置文件：
+
+```javascript
+export default {
+  projectId: '2364643',
+  outdir: './src/types',
+  
+  // 类型导出配置
+  types: {
+    // 类型文件输出目录
+    outdir: './src/swagger',
+    
+    // 类型文件名（不包含扩展名）
+    filename: 'all'
+  }
+};
+```
+
 ### 基本用法
 
 ```bash
@@ -267,19 +287,119 @@ APIFOX_PROJECT_ID=2364643
 apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --types
 ```
 
+#### 单个类型文件使用
+
 ```typescript
-// 导入类型工具
-import { makeURL, type MakeURL } from './output/types/index'
+// 1. 导入生成的 paths 类型
+import type { paths } from '../swagger/all'
 
-// 创建类型安全的 URL
-const orderUrl = makeURL('/api/omo/course/order/new', 'post')
+// 2. 导入类型工具
+import { 
+  makeURL, 
+  type MakeURL, 
+  type MakeRequest, 
+  type MakeResponse,
+  type InferMethodFromPaths 
+} from '@shixinde/apifox-swagger/types'
 
-// 提取类型信息
-type OrderAPI = MakeURL<(typeof orderUrl)[0], (typeof orderUrl)[1]>
+// 3. 创建类型安全的 URL（传入 paths 类型）
+const orderUrl = makeURL<paths, '/api/omo/course/order/new', 'post'>('/api/omo/course/order/new', 'post')
+
+// 4. 提取类型信息
+type OrderAPI = MakeURL<paths, '/api/omo/course/order/new', 'post'>
 type RequestData = OrderAPI['jsonData']     // 请求体类型
 type ResponseData = OrderAPI['responseData'] // 响应体类型
 type QueryParams = OrderAPI['query']        // 查询参数类型
 type PathParams = OrderAPI['pathParams']    // 路径参数类型
+```
+
+#### 多个类型文件使用
+
+如果你有多个 API 模块，可以配置多个类型文件：
+
+```javascript
+// apifox.config.js
+export default {
+  types: {
+    outdir: './src/swagger',
+    // 多个类型文件配置
+    files: [
+      { filename: 'user', projectId: '2364643' },
+      { filename: 'order', projectId: '2364644' },
+      { filename: 'product', projectId: '2364645' }
+    ]
+  }
+};
+```
+
+##### 方式一：统一类型导入（推荐）
+
+为了简化使用，建议创建一个统一的类型导入文件：
+
+```typescript
+// src/types/api.ts - 创建统一的类型导入文件
+import type { paths as UserPaths } from '../swagger/user'
+import type { paths as OrderPaths } from '../swagger/order'
+import type { paths as ProductPaths } from '../swagger/product'
+
+// 合并所有 API 路径类型
+export type AllPaths = UserPaths & OrderPaths & ProductPaths
+
+// 重新导出工具类型
+export { 
+  makeURL, 
+  type MakeURL, 
+  type MakeRequest, 
+  type MakeResponse,
+  type InferMethodFromPaths 
+} from '@shixinde/apifox-swagger/types'
+```
+
+然后在业务代码中直接使用：
+
+```typescript
+// 在业务代码中使用
+import { makeURL, type MakeURL, type AllPaths } from '../types/api'
+
+// 现在可以直接使用所有 API 路径，无需指定具体的 paths 类型
+const userLogin = makeURL<AllPaths, '/api/user/login', 'post'>('/api/user/login', 'post')
+const orderCreate = makeURL<AllPaths, '/api/order/create', 'post'>('/api/order/create', 'post')
+const productList = makeURL<AllPaths, '/api/product/list', 'get'>('/api/product/list', 'get')
+
+// 类型推断也会正常工作
+type UserLoginAPI = MakeURL<AllPaths, '/api/user/login', 'post'>
+type OrderCreateAPI = MakeURL<AllPaths, '/api/order/create', 'post'>
+type ProductListAPI = MakeURL<AllPaths, '/api/product/list', 'get'>
+```
+
+##### 方式二：分别导入
+
+如果需要明确区分不同模块的类型，也可以分别导入：
+
+```typescript
+// 分别导入不同模块的类型
+import type { paths as UserPaths } from '../swagger/user'
+import type { paths as OrderPaths } from '../swagger/order'
+import type { paths as ProductPaths } from '../swagger/product'
+
+import { 
+  makeURL, 
+  type MakeURL, 
+  type MakeRequest, 
+  type MakeResponse 
+} from '@shixinde/apifox-swagger/types'
+
+// 用户相关 API
+type UserLoginAPI = MakeURL<UserPaths, '/api/user/login', 'post'>
+const userLogin = makeURL<UserPaths, '/api/user/login', 'post'>('/api/user/login', 'post')
+
+// 订单相关 API
+type OrderCreateAPI = MakeURL<OrderPaths, '/api/order/create', 'post'>
+const orderCreate = makeURL<OrderPaths, '/api/order/create', 'post'>('/api/order/create', 'post')
+
+// 产品相关 API
+type ProductListAPI = MakeURL<ProductPaths, '/api/product/list', 'get'>
+const productList = makeURL<ProductPaths, '/api/product/list', 'get'>('/api/product/list', 'get')
 ```
 
 ### 高级用法
@@ -287,17 +407,24 @@ type PathParams = OrderAPI['pathParams']    // 路径参数类型
 #### 1. 创建类型安全的 API 客户端
 
 ```typescript
-import { makeURL, type MakeRequest, type MakeResponse, type InferMethodFromPaths, type paths } from './output/types/index'
+// 使用统一的类型导入
+import { 
+  makeURL, 
+  type MakeRequest, 
+  type MakeResponse, 
+  type InferMethodFromPaths,
+  type AllPaths 
+} from '../types/api'
 
 // 通用 API 调用函数
 function apiCall<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
+  U extends keyof AllPaths,
+  M extends InferMethodFromPaths<AllPaths, U>
 >(
   url: U,
   method: M,
-  data?: MakeRequest<U, M>
-): Promise<MakeResponse<U, M>> {
+  data?: MakeRequest<AllPaths, U, M>
+): Promise<MakeResponse<AllPaths, U, M>> {
   // 实现 API 调用逻辑
   return fetch(url, {
     method: method as string,
@@ -327,15 +454,21 @@ async function createOrder() {
 
 ```typescript
 import { useState, useEffect } from 'react'
-import { makeURL, type MakeRequest, type MakeResponse } from './output/types/index'
+import { 
+  makeURL, 
+  type MakeRequest, 
+  type MakeResponse, 
+  type InferMethodFromPaths,
+  type AllPaths 
+} from '../types/api'
 
-function useAPI<U extends keyof paths, M extends InferMethodFromPaths<U>>(
+function useAPI<U extends keyof AllPaths, M extends InferMethodFromPaths<AllPaths, U>>(
   url: U,
   method: M,
-  data?: MakeRequest<U, M>
+  data?: MakeRequest<AllPaths, U, M>
 ) {
   const [loading, setLoading] = useState(false)
-  const [result, setResult] = useState<MakeResponse<U, M> | null>(null)
+  const [result, setResult] = useState<MakeResponse<AllPaths, U, M> | null>(null)
   const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
@@ -370,19 +503,26 @@ function OrderComponent() {
 
 ### 类型说明
 
-- **`makeURL(url, method)`**: 创建类型安全的 URL 和方法组合
-- **`MakeURL<U, M>`**: 包含完整 API 信息的类型，包括请求参数和响应数据
-- **`MakeRequest<U, M>`**: 请求参数类型，包括 query、pathParams、formData、jsonData
-- **`MakeResponse<U, M>`**: 响应数据类型
-- **`InferMethodFromPaths<U>`**: 从路径推断可用的 HTTP 方法
-- **`paths`**: 所有 API 路径的类型定义
+- **`makeURL<TPaths, U, M>(url, method)`**: 创建类型安全的 URL 和方法组合
+- **`MakeURL<TPaths, U, M>`**: 包含完整 API 信息的类型，包括请求参数和响应数据
+- **`MakeRequest<TPaths, U, M>`**: 请求参数类型，包括 query、pathParams、formData、jsonData
+- **`MakeResponse<TPaths, U, M>`**: 响应数据类型
+- **`InferMethodFromPaths<TPaths, U>`**: 从路径推断可用的 HTTP 方法
+- **`paths`**: 从 Swagger 文档生成的所有 API 路径的类型定义
+
+其中：
+- `TPaths`: 从 Swagger 文档导入的 paths 类型
+- `U`: API 路径，如 `/api/user/login`
+- `M`: HTTP 方法，如 `get`、`post` 等
 
 ### 最佳实践
 
-1. **统一的 API 客户端**：创建一个统一的 API 调用函数，所有接口调用都通过它进行
-2. **类型复用**：将常用的类型定义导出，在多个文件中复用
-3. **错误处理**：结合 TypeScript 的联合类型，优雅地处理 API 错误
-4. **自动更新**：将类型生成集成到构建流程中，确保类型定义始终是最新的
+1. **统一类型导入**：创建 `src/types/api.ts` 文件，统一导入和导出所有 API 类型，避免在每个业务文件中重复导入多个 paths 类型
+2. **统一的 API 客户端**：创建一个统一的 API 调用函数，所有接口调用都通过它进行
+3. **类型复用**：将常用的类型定义导出，在多个文件中复用
+4. **错误处理**：结合 TypeScript 的联合类型，优雅地处理 API 错误
+5. **自动更新**：将类型生成集成到构建流程中，确保类型定义始终是最新的
+6. **模块化管理**：对于大型项目，可以按业务模块分别生成类型文件，然后通过统一的类型文件合并导出
 
 ## 许可证
 

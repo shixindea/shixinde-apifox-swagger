@@ -17,6 +17,22 @@ export default {
   // 是否使用本地 Apifox 客户端（可选，默认 false）
   useLocal: false,
   
+  // 类型导出配置（可选）
+  types: {
+    // 类型文件输出目录
+    outdir: './src/swagger',
+    
+    // 类型文件名（不包含扩展名）
+    filename: 'all',
+    
+    // 多个类型文件配置示例
+    // files: [
+    //   { filename: 'user', projectId: '2364643' },
+    //   { filename: 'order', projectId: '2364644' },
+    //   { filename: 'product', projectId: '2364645' }
+    // ]
+  },
+  
   // 其他可选配置
   options: {
     // 生成的文件名前缀

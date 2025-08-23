@@ -1,6 +1,7 @@
-// 从生成的swagger文件中导入paths类型
-// @ts-ignore
-import type { paths } from '../swagger/{{SWAGGER_FILE_NAME}}'
+// 类型安全的 API 工具
+// 用户需要手动导入 paths 类型，例如：
+// import type { paths } from '../swagger/all'
+// 然后使用这些工具函数
 
 // 过滤 method
 type FilterMethodKeys<T> = {
@@ -17,14 +18,15 @@ type FilterData<T> = {
 }
 
 // 找出所有可用的 method
-export type InferMethodFromPaths<U extends keyof paths> =
-  keyof FilterMethodKeys<paths[U]>
+export type InferMethodFromPaths<TPaths, U extends keyof TPaths> =
+  keyof FilterMethodKeys<TPaths[U]>
 
 // 找出 request query
 export type ExtractRequestQuery<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
-> = paths[U][M] extends infer O
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
+> = TPaths[U][M] extends infer O
   ? O extends {
       parameters: {
         query?: infer Query
@@ -36,9 +38,10 @@ export type ExtractRequestQuery<
 
 // 找出 request path params
 export type ExtractRequestPathParams<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
-> = paths[U][M] extends infer O
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
+> = TPaths[U][M] extends infer O
   ? O extends {
       parameters: {
         path?: infer PathParams
@@ -50,9 +53,10 @@ export type ExtractRequestPathParams<
 
 // 找出 request body (form-data)
 export type ExtractRequestFormData<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
-> = paths[U][M] extends infer O
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
+> = TPaths[U][M] extends infer O
   ? O extends {
       requestBody?: {
         content: {
@@ -66,9 +70,10 @@ export type ExtractRequestFormData<
 
 // 找出 request body (json)
 export type ExtractRequestJsonData<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
-> = paths[U][M] extends infer O
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
+> = TPaths[U][M] extends infer O
   ? O extends {
       requestBody?: {
         content: {
@@ -82,9 +87,10 @@ export type ExtractRequestJsonData<
 
 // 找出 response data
 export type ExtractResponseData<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
-> = paths[U][M] extends infer O
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
+> = TPaths[U][M] extends infer O
   ? O extends {
       responses: {
         200: {
@@ -105,8 +111,9 @@ export type ExtractResponseData<
  * @returns 只读元组 [url, method]
  */
 export function makeURL<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
 >(url: U, method: M): readonly [U, M] {
   return [url, method] as const
 }
@@ -115,37 +122,37 @@ export function makeURL<
  * MakeURL类型，包含所有相关的类型信息
  */
 export type MakeURL<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
 > = {
   url: readonly [U, M]
-  pathParams: ExtractRequestPathParams<U, M>
-  query: ExtractRequestQuery<U, M>
-  formData: ExtractRequestFormData<U, M>
-  jsonData: ExtractRequestJsonData<U, M>
-  responseData: ExtractResponseData<U, M>
+  pathParams: ExtractRequestPathParams<TPaths, U, M>
+  query: ExtractRequestQuery<TPaths, U, M>
+  formData: ExtractRequestFormData<TPaths, U, M>
+  jsonData: ExtractRequestJsonData<TPaths, U, M>
+  responseData: ExtractResponseData<TPaths, U, M>
 }
 
 /**
  * 请求类型
  */
 export type MakeRequest<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
 > = {
-  pathParams?: ExtractRequestPathParams<U, M>
-  query?: ExtractRequestQuery<U, M>
-  formData?: ExtractRequestFormData<U, M>
-  jsonData?: ExtractRequestJsonData<U, M>
+  pathParams?: ExtractRequestPathParams<TPaths, U, M>
+  query?: ExtractRequestQuery<TPaths, U, M>
+  formData?: ExtractRequestFormData<TPaths, U, M>
+  jsonData?: ExtractRequestJsonData<TPaths, U, M>
 }
 
 /**
  * 响应类型
  */
 export type MakeResponse<
-  U extends keyof paths,
-  M extends InferMethodFromPaths<U>
-> = ExtractResponseData<U, M>
-
-// 导出paths类型
-export type { paths }
+  TPaths,
+  U extends keyof TPaths,
+  M extends InferMethodFromPaths<TPaths, U>
+> = ExtractResponseData<TPaths, U, M>
