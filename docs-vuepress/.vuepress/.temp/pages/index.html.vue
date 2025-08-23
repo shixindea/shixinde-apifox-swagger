@@ -3,7 +3,7 @@
 <br />
 <br />
 <p align="center">
-  <a href="https://github.com/shixinde/apifox-swagger/">
+  <a href="https://www.npmjs.com/package/@shixinde/apifox-swagger/">
        <img src="@source/.vuepress/public/logo.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">@shixinde/apifox-swagger</h3>
@@ -135,7 +135,7 @@
 <li><a href="https://shixindea.github.io/shixinde-apifox-swagger/" target="_blank" rel="noopener noreferrer">JavaScript 工具类 Guoguo-utils</a></li>
 <li><a href="https://www.npmjs.com/package/@shixinde/vuepress-theme-init" target="_blank" rel="noopener noreferrer">vuepress 快速模板 Guoguo-vuepress</a></li>
 <li><a href="https://www.npmjs.com/package/@shixinde/vuepress-theme-init" target="_blank" rel="noopener noreferrer">个人笔记 guoguo-notes</a></li>
-<li><a href="https://www.npmjs.com/package/@shixinde/apifox-swagger" target="_blank" rel="noopener noreferrer">api 文档生成工具 apifox-swagger</a></li>
+<li><a href="https://www.npmjs.com/package/@shixinde/apifox-swagger" target="_blank" rel="noopener noreferrer">Apifox Swagger文档生成与TS类型解析工具 @shixinde/apifox-swagger</a></li>
 </ul>
 <h3 id="许可证" tabindex="-1"><a class="header-anchor" href="#许可证"><span>许可证</span></a></h3>
 <p>该项目基于 MIT 许可证开源，详情请参阅 <a href="https://github.com/shixinde/apifox-swagger/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a>。</p>

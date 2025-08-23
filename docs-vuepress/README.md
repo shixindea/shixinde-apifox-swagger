@@ -2,13 +2,14 @@
 sidebar: false
 ---
 
+
 <br />
 <br />
 <br />
 <br />
 
 <p align="center">
-  <a href="https://github.com/shixinde/apifox-swagger/">
+  <a href="https://www.npmjs.com/package/@shixinde/apifox-swagger/">
        <img src="./.vuepress/public/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -160,7 +161,7 @@ export default {
 - [JavaScript 工具类 Guoguo-utils](https://shixindea.github.io/shixinde-apifox-swagger/)
 - [vuepress 快速模板 Guoguo-vuepress](https://www.npmjs.com/package/@shixinde/vuepress-theme-init)
 - [个人笔记 guoguo-notes](https://www.npmjs.com/package/@shixinde/vuepress-theme-init)
-- [api 文档生成工具 apifox-swagger](https://www.npmjs.com/package/@shixinde/apifox-swagger)
+- [Apifox Swagger文档生成与TS类型解析工具 @shixinde/apifox-swagger](https://www.npmjs.com/package/@shixinde/apifox-swagger)
 
 
 ### 许可证

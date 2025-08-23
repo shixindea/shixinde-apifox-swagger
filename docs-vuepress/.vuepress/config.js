@@ -48,6 +48,12 @@ export default defineUserConfig({
     }),
     theme: defaultTheme({
         // 以下所有配置写在这里！！！
+        // 全局右侧目录配置
+        outline: {
+            level: [3,4,5, 6],
+            label: '页面导航'
+        },
+        sidebarDepth: 2,
         locales: {
             '/': {
                 repo: 'https://github.com/shixindea/shixinde-apifox-swagger',
@@ -55,10 +61,8 @@ export default defineUserConfig({
                 selectLanguageText: '选择语言',
                 navbar: zhNavbar,
                 sidebar: zhSidebar,
-                sidebarDepth: 2,
                 notFound: ['没找到', '网页走丢了'],
-                backToHome: '返回首页'
-
+                backToHome: '返回首页',
             },
             '/en/': {
                 repo: 'https://github.com/shixindea/shixinde-apifox-swagger',
@@ -66,7 +70,6 @@ export default defineUserConfig({
                 selectLanguageText: 'Language',
                 navbar: enNavbar,
                 sidebar: zhSidebar,
-                
 
             }
         }
