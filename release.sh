@@ -21,42 +21,42 @@ npx vite build
 
 cp src/cli.js dist/cli.js
 
-# if [ $? -ne 0 ]; then
-#     echo -e "${RED}😭😭😭 构建失败！${NC}"
-#     exit 1
-# fi
+if [ $? -ne 0 ]; then
+    echo -e "${RED}😭😭😭 构建失败！${NC}"
+    exit 1
+fi
 
-# echo -e "${GREEN}✅ 构建成功！${NC}"
+echo -e "${GREEN}✅ 构建成功！${NC}"
 
-# # 2. 添加文件到 git
-# echo -e "${YELLOW}📝 添加文件到 git...${NC}"
-# git add .
+# 2. 添加文件到 git
+echo -e "${YELLOW}📝 添加文件到 git...${NC}"
+git add .
 
-# if [ $? -ne 0 ]; then
-#     echo -e "${RED}😭😭😭 git add 失败！${NC}"
-#     exit 1
-# fi
+if [ $? -ne 0 ]; then
+    echo -e "${RED}😭😭😭 git add 失败！${NC}"
+    exit 1
+fi
 
-# # 3. 提交代码
-# echo -e "${YELLOW}💾 提交代码...${NC}"
-# git commit -m "update:更新文档$(date +%F\ %T)"
+# 3. 提交代码
+echo -e "${YELLOW}💾 提交代码...${NC}"
+git commit -m "update:更新文档$(date +%F\ %T)"
 
-# if [ $? -ne 0 ]; then
-#     echo -e "${YELLOW}⚠️  没有新的更改需要提交${NC}"
-# else
-#     echo -e "${GREEN}😀😀😀 💨💨💨 commit成功${NC}"
-# fi
+if [ $? -ne 0 ]; then
+    echo -e "${YELLOW}⚠️  没有新的更改需要提交${NC}"
+else
+    echo -e "${GREEN}😀😀😀 💨💨💨 commit成功${NC}"
+fi
 
-# # 4. 推送代码
-# echo -e "${YELLOW}🚀 推送代码到远程仓库...${NC}"
-# git push
+# 4. 推送代码
+echo -e "${YELLOW}🚀 推送代码到远程仓库...${NC}"
+git push
 
-# if [ $? -eq 0 ]; then
-#     echo -e "${GREEN}😀😀😀 💨 Push 成功！${NC}"
-# else
-#     echo -e "${RED}😭😭😭 💨 Push 失败！${NC}"
-#     exit 1
-# fi
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}😀😀😀 💨 Push 成功！${NC}"
+else
+    echo -e "${RED}😭😭😭 💨 Push 失败！${NC}"
+    exit 1
+fi
 
-# echo -e "${GREEN}🎉 所有操作完成！${NC}"
+echo -e "${GREEN}🎉 所有操作完成！${NC}"
 

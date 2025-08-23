@@ -245,16 +245,8 @@ const generateTypesFolder = async (outdir, fileName) => {
     // 确保 types 目录存在
     __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].ensureDirSync(typesDir);
     
-    // 读取模板文件
-    const templatePath = new URL('../src/types-template.ts', import.meta.url).pathname;
-    let templateContent;
-    
-    try {
-        templateContent = __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].readFileSync(templatePath, 'utf8');
-    } catch (error) {
-        // 如果模板文件不存在，使用内联模板
-        templateContent = getInlineTypesTemplate();
-    }
+    // 直接使用内联模板，避免文件路径问题
+    const templateContent = getInlineTypesTemplate();
     
     // 替换模板中的占位符
     const finalContent = templateContent.replace(/{{SWAGGER_FILE_NAME}}/g, fileName);
