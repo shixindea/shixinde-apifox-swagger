@@ -9,7 +9,7 @@ export default defineUserConfig({
     "description": "袁果锅开发工具类",
     port: '6688', //端口号
     "dest": "docs",
-    base:"/shixinde-apifox-swagger/",
+    base:"/shixinde-apifox-swagger-docs/",
     head: [
         [
             "link",
