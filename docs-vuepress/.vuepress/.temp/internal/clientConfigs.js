@@ -1,12 +1,12 @@
-import * as clientConfig0 from 'F:/my-project/utils/node_modules/@vuepress/plugin-active-header-links/lib/client/config.js'
-import * as clientConfig1 from 'F:/my-project/utils/node_modules/@vuepress/plugin-back-to-top/lib/client/config.js'
-import * as clientConfig2 from 'F:/my-project/utils/node_modules/@vuepress/plugin-copy-code/lib/client/config.js'
-import * as clientConfig3 from 'F:/my-project/utils/node_modules/@vuepress/plugin-medium-zoom/lib/client/config.js'
-import * as clientConfig4 from 'F:/my-project/utils/node_modules/@vuepress/plugin-nprogress/lib/client/config.js'
-import * as clientConfig5 from 'F:/my-project/utils/node_modules/@vuepress/plugin-theme-data/lib/client/config.js'
-import * as clientConfig6 from 'F:/my-project/utils/node_modules/@vuepress/theme-default/lib/client/config.js'
-import * as clientConfig7 from 'F:/my-project/utils/docs-vuepress/.vuepress/.temp/sass-palette/load-hope.js'
-import * as clientConfig8 from 'F:/my-project/utils/node_modules/vuepress-plugin-search-pro/lib/client/config.js'
+import * as clientConfig0 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/node_modules/@vuepress/plugin-active-header-links/lib/client/config.js'
+import * as clientConfig1 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/node_modules/@vuepress/plugin-back-to-top/lib/client/config.js'
+import * as clientConfig2 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/node_modules/@vuepress/plugin-copy-code/lib/client/config.js'
+import * as clientConfig3 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/node_modules/@vuepress/plugin-medium-zoom/lib/client/config.js'
+import * as clientConfig4 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/node_modules/@vuepress/plugin-nprogress/lib/client/config.js'
+import * as clientConfig5 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/node_modules/@vuepress/plugin-theme-data/lib/client/config.js'
+import * as clientConfig6 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/node_modules/@vuepress/theme-default/lib/client/config.js'
+import * as clientConfig7 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/docs-vuepress/.vuepress/.temp/sass-palette/load-hope.js'
+import * as clientConfig8 from '/Users/guoguo/code/my-project/shixinde-apifox-swagger/node_modules/vuepress-plugin-search-pro/lib/client/config.js'
 
 export const clientConfigs = [
   clientConfig0,

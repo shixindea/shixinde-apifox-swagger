@@ -1,124 +1,175 @@
-<!-- # Guoguo 工具类 -->
-
 <br />
 <br />
 <br />
 <br />
 
 <p align="center">
-  <a href="https://github.com/shixindea/shixinde-utils/">
+  <a href="https://github.com/shixinde/apifox-swagger/">
        <img src="./.vuepress/public/logo.png" alt="Logo" width="80" height="80">
-
   </a>
 
-  <h3 align="center">Guoguo-utils</h3>
+  <h3 align="center">@shixinde/apifox-swagger</h3>
   <p align="left" style="text-indent:2em">
-   欢迎各位开发者使用我的JavaScript个人工具类库！这个库集合了一系列精心设计的静态方法，旨在简化日常开发中的常见任务，如字符串处理、数组操作、日期格式化等。我致力于打造一个高效、易用且可扩展的工具集，希望能为您的项目开发带来便利。
+   一个强大的 Apifox API 文档导出工具，支持将 Apifox 项目导出为 Swagger JSON 和 TypeScript 类型定义。提供命令行工具和编程接口，让 API 文档管理变得简单高效。
  </p>
   <p align="left" style="text-indent:2em">
-  每一次的更新和迭代，都凝聚着我对代码质量的不懈追求和对编程技术的深入理解。我深知，没有最好，只有更好。因此，我将继续努力学习，不断优化和完善这个工具类库，以满足更多开发者的需求。
+  支持多种导出方式：云端项目导出、本地客户端导出、模块化导出等。生成的 TypeScript 类型定义具有完整的类型安全保障，让前端开发更加可靠。
  </p>
 
-期待您的反馈与建议，让我们携手共进，在 JavaScript 的海洋中探索更多可能！
-<a href="https://github.com/shixindea/shixinde-utils"><strong>探索本项目的文档 »</strong></a>
+让 API 文档管理变得简单，让类型安全成为开发标准！
+<a href="./quick-start"><strong>快速开始 »</strong></a>
 <br />
 <br />
-<a href="https://shixindea.github.io/#/">进入 Guoguo-ui</a>
+<a href="./installation">安装指南</a>
 ·
-<a href="https://www.npmjs.com/settings/shixinde/packages">NPM查看Guoguo系列</a>
+<a href="https://www.npmjs.com/package/@shixinde/apifox-swagger">NPM 包</a>
 ·
-<a href="https://github.com/shixindea/shixinde-utils">查看 Demo</a>
+<a href="./cli">命令行工具</a>
 ·
-<a href="https://github.com/shixindea/shixinde-utils/issues">报告 Bug</a>
+<a href="https://github.com/shixinde/apifox-swagger/issues">报告 Bug</a>
 ·
-<a href="https://github.com/shixindea/shixinde-utils/issues">提出新特性</a>
+<a href="https://github.com/shixinde/apifox-swagger/issues">提出新特性</a>
 
 </p>
 <br />
 <br />
 <br />
 
-<!-- PROJECT SHIELDS -->
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <br />
 
 ## 目录
 
-- [简介](#简介)
-- [安装步骤](#安装步骤)
-- [为什么选择Guoguo-utils工具类](#我们的优势)
-- [其他开源项目](#其他开源项目)
-- [作者](#作者)
-- [版权说明](#版权说明)
+- [目录](#目录)
+  - [简介](#简介)
+  - [特性](#特性)
+  - [快速开始](#快速开始)
+    - [安装](#安装)
+    - [基本使用](#基本使用)
+  - [使用指南](#使用指南)
+  - [配置](#配置)
+  - [贡献](#贡献)
+  - [相关项目](#相关项目)
+  - [许可证](#许可证)
+  - [作者](#作者)
 
 ### 简介
 
-Guoguo-utils 是一个一致性、模块化、高性能的 JavaScript 实用工具库。
+@shixinde/apifox-swagger 是一个专为 Apifox 用户设计的 API 文档导出工具。它可以将 Apifox 项目中的 API 文档导出为标准的 Swagger JSON 格式和 TypeScript 类型定义文件，让前端开发者能够享受完整的类型安全保障。
 
-Guoguo-utils 遵循 MIT 开源协议发布，并且支持最新的运行环境。 查看各个构件版本的区别并选择一个适合你的版本。
+该工具支持云端和本地两种导出方式，提供了灵活的配置选项和强大的 TypeScript 类型工具，是现代前端开发的理想选择。
 
 
-###### **安装步骤**
+### 特性
 
-1. 进入npm官网查看详细版本
-<a href="https://www.npmjs.com/package/@shixinde/utils?activeTab=versions"><strong>点进查看 »</strong></a>
+- 🚀 **多种导出方式** - 支持云端项目和本地客户端导出
+- 📦 **模块化导出** - 支持按文件夹分模块导出，便于大型项目管理
+- 🔧 **命令行工具** - 提供简单易用的 CLI 工具
+- 💻 **编程接口** - 支持在 Node.js 项目中编程调用
+- 🎯 **TypeScript 支持** - 生成完整的类型定义，享受类型安全
+- ⚡ **高性能** - 支持并行导出和缓存机制
+- 🔄 **CI/CD 集成** - 完美支持各种持续集成环境
+- 📝 **丰富配置** - 灵活的配置选项满足不同需求
 
-```sh
-npm i @shixinde/utils
-pnpm i @shixinde/utils
+### 快速开始
 
-npm i @shixinde/utils@版本号
+#### 安装
+
+```bash
+# 使用 npm
+npm install -g @shixinde/apifox-swagger
+
+# 使用 yarn
+yarn global add @shixinde/apifox-swagger
+
+# 使用 pnpm
+pnpm add -g @shixinde/apifox-swagger
 ```
 
-### 我们的优势
+#### 基本使用
 
-Guoguo-utils 通过降低 array、number、objects、string 等等的使用难度从而让 JavaScript 变得更简单。 Lodash 的模块化方法 非常适用于：
+```bash
+# 导出 Apifox 项目
+apifox-swagger export --project-id YOUR_PROJECT_ID --token YOUR_ACCESS_TOKEN
 
-遍历 array、object 和 string
-对值进行操作和检测
-创建符合功能的函数
+# 查看帮助
+apifox-swagger --help
+```
+
+更多详细信息请查看 [快速开始指南](./quick-start.md)。
+
+### 使用指南
+
+我们提供了详细的文档来帮助你快速上手：
+
+- **[安装指南](./installation.md)** - 详细的安装步骤和环境要求
+- **[命令行工具](./cli.md)** - CLI 工具的完整使用说明
+- **[编程接口](./api.md)** - Node.js 编程接口文档
+- **[TypeScript 类型工具](./typescript.md)** - 类型安全的 API 调用方法
+- **[配置参考](./configuration.md)** - 完整的配置选项说明
+- **[故障排除](./troubleshooting.md)** - 常见问题和解决方案
+
+### 配置
+
+支持多种配置方式：
+
+```javascript
+// apifox.config.js
+export default {
+  projectId: 'YOUR_PROJECT_ID',
+  token: process.env.APIFOX_ACCESS_TOKEN,
+  outdir: './src/types',
+  
+  // 模块化导出
+  modules: [
+    {
+      name: '用户模块',
+      folderId: 'USER_FOLDER_ID',
+      outdir: './src/types/user'
+    }
+  ]
+};
+```
+
+更多配置选项请查看 [配置参考](./configuration.md)。
 
 
 
-### 其他开源项目
+### 贡献
 
-- [Vue3组件库 Guoguo-ui](https://shixindea.github.io/#/)
-- [Git提交规范 Guoguo-cz](https://www.npmjs.com/package/@shixinde/guoguo-cz)
-- [JavaScript工具类 Guoguo-utils](https://shixindea.github.io/shixinde-utils/)
-- [vuepress快速模板 Guoguo-vuepress](https://www.npmjs.com/package/@shixinde/vuepress-theme-init)
+我们欢迎所有形式的贡献！如果你有任何想法、建议或发现了 bug，请：
 
+1. 查看 [Issues](https://github.com/shixinde/apifox-swagger/issues) 是否已有相关问题
+2. 创建新的 Issue 描述问题或建议
+3. 提交 Pull Request
+
+在提交代码前，请确保：
+- 代码通过所有测试
+- 遵循项目的代码规范
+- 添加必要的文档和测试
+
+### 相关项目
+
+- [Vue3 组件库 Element ProMax](https://shixindea.github.io/element-promax-docs/en-US/)
+- [Git 提交规范 Guoguo-cz](https://www.npmjs.com/package/@shixinde/guoguo-cz)
+- [JavaScript 工具类 Guoguo-utils](https://shixindea.github.io/shixinde-utils/)
+- [vuepress 快速模板 Guoguo-vuepress](https://www.npmjs.com/package/@shixinde/vuepress-theme-init)
+- [个人笔记 guoguo-notes](https://www.npmjs.com/package/@shixinde/vuepress-theme-init)
+- [api 文档生成工具 apifox-swagger](https://www.npmjs.com/package/@shixinde/apifox-swagger)
+
+
+### 许可证
+
+该项目基于 MIT 许可证开源，详情请参阅 [LICENSE](https://github.com/shixinde/apifox-swagger/blob/main/LICENSE)。
 
 ### 作者
 
-袁果锅@shixinde
+袁果锅 (@shixinde)
 
-邮箱：2914310412@qq.com
+- GitHub: [@shixinde](https://github.com/shixinde)
+- Email: 2914310412@qq.com
 
-### 版权说明
+---
 
-该项目签署了 MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/shixindea/shixinde-utils/blob/master/LICENSE.txt)
-
-
-<!-- links -->
-
-[your-project-path]: shaojintian/Best_README_template
-[contributors-shield]: https://img.shields.io/github/contributors/shaojintian/Best_README_template.svg?style=flat-square
-[contributors-url]: https://github.com/shixindea/shixinde-utils/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/shaojintian/Best_README_template.svg?style=flat-square
-[forks-url]: https://github.com/shixindea/shixinde-utils/network/members
-[stars-shield]: https://img.shields.io/github/stars/shaojintian/Best_README_template.svg?style=flat-square
-[stars-url]: https://github.com/shixindea/shixinde-utils/stargazers
-[issues-shield]: https://img.shields.io/github/issues/shaojintian/Best_README_template.svg?style=flat-square
-[issues-url]: https://img.shields.io/github/issues/shaojintian/Best_README_template.svg
-[license-shield]: https://img.shields.io/github/license/shaojintian/Best_README_template.svg?style=flat-square
-[license-url]: https://github.com/shixindea/shixinde-utils/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/shaojintian
+如果这个项目对你有帮助，请给我们一个 ⭐️！

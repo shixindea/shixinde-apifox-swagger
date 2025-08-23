@@ -64,7 +64,7 @@ apifox-swagger apifox-swagger --local --outdir ./output
 - `--local`: 从本地 Apifox 客户端导出
 - `--folderId <folderId>`: 指定文件夹 ID
 - `--folderName <folderName>`: 指定文件夹名称
-- `--types`: 生成类型安全的 API 工具（生成 types 文件夹）
+<!-- - `--types`: 生成类型安全的 API 工具（生成 types 文件夹） -->
 
 ### 2. 编程接口
 
@@ -87,7 +87,7 @@ const result = await exportSwagger({
   token: 'your-access-token',
   outdir: './output',
   useLocal: false,
-  generateTypes: true
+  // generateTypes: true
 });
 
 // 从本地客户端导出
@@ -163,7 +163,7 @@ APIFOX_PROJECT_ID=2364643
 - `all.json`: OpenAPI/Swagger JSON 文档
 - `all.ts`: TypeScript 类型定义文件
 
-如果启用了 `--types` 选项或 `generateTypes: true`，还会创建 `types` 文件夹，包含：
+<!-- 如果启用了 `--types` 选项或 `generateTypes: true`，还会创建 `types` 文件夹，包含： -->
 
 - `index.ts`: 类型安全的 API 工具，包含 `makeURL` 函数和相关类型定义
 
@@ -183,7 +183,7 @@ APIFOX_PROJECT_ID=2364643
 - `options.useLocal` (boolean): 是否使用本地客户端（默认：false）
 - `options.folderId` (string): 文件夹 ID（可选）
 - `options.folderName` (string): 文件夹名称（可选）
-- `options.generateTypes` (boolean): 是否生成类型安全的 API 工具（默认：false）
+<!-- - `options.generateTypes` (boolean): 是否生成类型安全的 API 工具（默认：false） -->
 
 #### 返回值
 
@@ -249,7 +249,7 @@ APIFOX_PROJECT_ID=2364643
 1. 检查 OpenAPI 文档格式是否正确
 2. 确保安装了所有必需的依赖
 
-## 类型安全的 API 工具
+<!-- ## 类型安全的 API 工具
 
 ### 功能介绍
 
@@ -278,7 +278,7 @@ export default {
     filename: 'all'
   }
 };
-```
+``` -->
 
 ### 基本用法
 

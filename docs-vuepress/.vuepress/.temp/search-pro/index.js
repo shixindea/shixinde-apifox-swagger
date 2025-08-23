@@ -1,1 +1,1 @@
-export default {"/en/": () => import('./en.js'),"/": () => import('./root.js')}
+export default {"/": () => import('./root.js')}

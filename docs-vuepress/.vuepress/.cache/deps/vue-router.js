@@ -19,12 +19,17 @@ import {
   unref,
   watch,
   watchEffect
-} from "./chunk-AU3CLKKL.js";
+} from "./chunk-5KYYQTCL.js";
 
 // node_modules/vue-router/dist/vue-router.mjs
 var isBrowser = typeof document !== "undefined";
+function isRouteComponent(component) {
+  return typeof component === "object" || "displayName" in component || "props" in component || "__vccOpts" in component;
+}
 function isESModule(obj) {
-  return obj.__esModule || obj[Symbol.toStringTag] === "Module";
+  return obj.__esModule || obj[Symbol.toStringTag] === "Module" || // support CF with dynamic imports that do not
+  // add the Module string tag
+  obj.default && isRouteComponent(obj.default);
 }
 var assign = Object.assign;
 function applyToParams(fn, params) {
@@ -423,7 +428,7 @@ function useHistoryStateNavigation(base) {
 
 history.replaceState(history.state, '', url)
 
-You can find more information at https://next.router.vuejs.org/guide/migration/#usage-of-history-state.`);
+You can find more information at https://router.vuejs.org/guide/migration/#Usage-of-history-state`);
     }
     changeLocation(currentState.current, currentState, true);
     const state = assign({}, buildState(currentLocation.value, to, null), { position: currentState.position + 1 }, data);
@@ -465,15 +470,15 @@ function createWebHistory(base) {
 }
 function createMemoryHistory(base = "") {
   let listeners = [];
-  let queue = [START];
+  let queue = [[START, {}]];
   let position = 0;
   base = normalizeBase(base);
-  function setLocation(location2) {
+  function setLocation(location2, state = {}) {
     position++;
     if (position !== queue.length) {
       queue.splice(position);
     }
-    queue.push(location2);
+    queue.push([location2, state]);
   }
   function triggerListeners(to, from, { direction, delta }) {
     const info = {
@@ -488,16 +493,16 @@ function createMemoryHistory(base = "") {
   const routerHistory = {
     // rewritten by Object.defineProperty
     location: START,
-    // TODO: should be kept in queue
+    // rewritten by Object.defineProperty
     state: {},
     base,
     createHref: createHref.bind(null, base),
-    replace(to) {
+    replace(to, state) {
       queue.splice(position--, 1);
-      setLocation(to);
+      setLocation(to, state);
     },
-    push(to, data) {
-      setLocation(to);
+    push(to, state) {
+      setLocation(to, state);
     },
     listen(callback) {
       listeners.push(callback);
@@ -509,7 +514,7 @@ function createMemoryHistory(base = "") {
     },
     destroy() {
       listeners = [];
-      queue = [START];
+      queue = [[START, {}]];
       position = 0;
     },
     go(delta, shouldTrigger = true) {
@@ -531,7 +536,11 @@ function createMemoryHistory(base = "") {
   };
   Object.defineProperty(routerHistory, "location", {
     enumerable: true,
-    get: () => queue[position]
+    get: () => queue[position][0]
+  });
+  Object.defineProperty(routerHistory, "state", {
+    enumerable: true,
+    get: () => queue[position][1]
   });
   return routerHistory;
 }
@@ -692,7 +701,7 @@ function tokensToParser(segments, extraOptions) {
     pattern += "/?";
   if (options.end)
     pattern += "$";
-  else if (options.strict)
+  else if (options.strict && !pattern.endsWith("/"))
     pattern += "(?:/|$)";
   const re = new RegExp(pattern, options.sensitive ? "" : "i");
   function parse(path) {
@@ -944,22 +953,24 @@ function createRouterMatcher(routes, globalOptions) {
     }
     mainNormalizedRecord.aliasOf = originalRecord && originalRecord.record;
     const options = mergeOptions(globalOptions, record);
-    const normalizedRecords = [
-      mainNormalizedRecord
-    ];
+    const normalizedRecords = [mainNormalizedRecord];
     if ("alias" in record) {
       const aliases = typeof record.alias === "string" ? [record.alias] : record.alias;
       for (const alias of aliases) {
-        normalizedRecords.push(assign({}, mainNormalizedRecord, {
-          // this allows us to hold a copy of the `components` option
-          // so that async components cache is hold on the original record
-          components: originalRecord ? originalRecord.record.components : mainNormalizedRecord.components,
-          path: alias,
-          // we might be the child of an alias
-          aliasOf: originalRecord ? originalRecord.record : mainNormalizedRecord
-          // the aliases are always of the same kind as the original since they
-          // are defined on the same record
-        }));
+        normalizedRecords.push(
+          // we need to normalize again to ensure the `mods` property
+          // being non enumerable
+          normalizeRouteRecord(assign({}, mainNormalizedRecord, {
+            // this allows us to hold a copy of the `components` option
+            // so that async components cache is hold on the original record
+            components: originalRecord ? originalRecord.record.components : mainNormalizedRecord.components,
+            path: alias,
+            // we might be the child of an alias
+            aliasOf: originalRecord ? originalRecord.record : mainNormalizedRecord
+            // the aliases are always of the same kind as the original since they
+            // are defined on the same record
+          }))
+        );
       }
     }
     let matcher;
@@ -972,7 +983,7 @@ function createRouterMatcher(routes, globalOptions) {
         normalizedRecord.path = parent.record.path + (path && connectingSlash + path);
       }
       if (normalizedRecord.path === "*") {
-        throw new Error('Catch all routes ("*") must now be defined using a param with a custom regexp.\nSee more at https://next.router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes.');
+        throw new Error('Catch all routes ("*") must now be defined using a param with a custom regexp.\nSee more at https://router.vuejs.org/guide/migration/#Removed-star-or-catch-all-routes.');
       }
       matcher = createRouteRecordMatcher(normalizedRecord, parent, options);
       if (parent && path[0] === "/")
@@ -986,8 +997,12 @@ function createRouterMatcher(routes, globalOptions) {
         originalMatcher = originalMatcher || matcher;
         if (originalMatcher !== matcher)
           originalMatcher.alias.push(matcher);
-        if (isRootAdd && record.name && !isAliasRecord(matcher))
+        if (isRootAdd && record.name && !isAliasRecord(matcher)) {
+          if (true) {
+            checkSameNameAsAncestor(record, parent);
+          }
           removeRoute(record.name);
+        }
       }
       if (isMatchable(matcher)) {
         insertMatcher(matcher);
@@ -1122,12 +1137,12 @@ function paramsFromLocation(params, keys) {
   return newParams;
 }
 function normalizeRouteRecord(record) {
-  return {
+  const normalized = {
     path: record.path,
     redirect: record.redirect,
     name: record.name,
     meta: record.meta || {},
-    aliasOf: void 0,
+    aliasOf: record.aliasOf,
     beforeEnter: record.beforeEnter,
     props: normalizeRecordProps(record),
     children: record.children || [],
@@ -1135,8 +1150,14 @@ function normalizeRouteRecord(record) {
     leaveGuards: /* @__PURE__ */ new Set(),
     updateGuards: /* @__PURE__ */ new Set(),
     enterCallbacks: {},
+    // must be declared afterwards
+    // mods: {},
     components: "components" in record ? record.components || null : record.component && { default: record.component }
   };
+  Object.defineProperty(normalized, "mods", {
+    value: {}
+  });
+  return normalized;
 }
 function normalizeRecordProps(record) {
   const propsObject = {};
@@ -1183,6 +1204,13 @@ function checkSameParams(a, b) {
 function checkChildMissingNameWithEmptyPath(mainNormalizedRecord, parent) {
   if (parent && parent.record.name && !mainNormalizedRecord.name && !mainNormalizedRecord.path) {
     warn(`The route named "${String(parent.record.name)}" has a child without a name and an empty path. Using that name won't render the empty path child so you probably want to move the name to the child instead. If this is intentional, add a name to the child route to remove the warning.`);
+  }
+}
+function checkSameNameAsAncestor(record, parent) {
+  for (let ancestor = parent; ancestor; ancestor = ancestor.parent) {
+    if (ancestor.record.name === record.name) {
+      throw new Error(`A route named "${String(record.name)}" has been added as a ${parent === ancestor ? "child" : "descendant"} of a route with the same name. Route names must be unique and a nested route cannot use the same name as an ancestor.`);
+    }
   }
 }
 function checkMissingParamsInAbsolutePath(record, parent) {
@@ -1444,8 +1472,9 @@ function extractComponentsGuards(matched, guardType, to, from, runWithContext = 
         }
         guards.push(() => componentPromise.then((resolved) => {
           if (!resolved)
-            return Promise.reject(new Error(`Couldn't resolve component "${name}" at "${record.path}"`));
+            throw new Error(`Couldn't resolve component "${name}" at "${record.path}"`);
           const resolvedComponent = isESModule(resolved) ? resolved.default : resolved;
+          record.mods[name] = resolved;
           record.components[name] = resolvedComponent;
           const options = resolvedComponent.__vccOpts || resolvedComponent;
           const guard = options[guardType];
@@ -1456,9 +1485,6 @@ function extractComponentsGuards(matched, guardType, to, from, runWithContext = 
   }
   return guards;
 }
-function isRouteComponent(component) {
-  return typeof component === "object" || "displayName" in component || "props" in component || "__vccOpts" in component;
-}
 function loadRouteLocation(route) {
   return route.matched.every((record) => record.redirect) ? Promise.reject(new Error("Cannot load a route that redirects.")) : Promise.all(route.matched.map((record) => record.components && Promise.all(Object.keys(record.components).reduce((promises, name) => {
     const rawComponent = record.components[name];
@@ -1467,6 +1493,7 @@ function loadRouteLocation(route) {
         if (!resolved)
           return Promise.reject(new Error(`Couldn't resolve component "${name}" at "${record.path}". Ensure you passed a function that returns a promise.`));
         const resolvedComponent = isESModule(resolved) ? resolved.default : resolved;
+        record.mods[name] = resolved;
         record.components[name] = resolvedComponent;
         return;
       }));
@@ -1523,10 +1550,14 @@ function useLink(props) {
   const isExactActive = computed(() => activeRecordIndex.value > -1 && activeRecordIndex.value === currentRoute.matched.length - 1 && isSameRouteLocationParams(currentRoute.params, route.value.params));
   function navigate(e = {}) {
     if (guardEvent(e)) {
-      return router[unref(props.replace) ? "replace" : "push"](
+      const p = router[unref(props.replace) ? "replace" : "push"](
         unref(props.to)
         // avoid uncaught errors are they are logged anyway
       ).catch(noop);
+      if (props.viewTransition && typeof document !== "undefined" && "startViewTransition" in document) {
+        document.startViewTransition(() => p);
+      }
+      return p;
     }
     return Promise.resolve();
   }
@@ -1557,6 +1588,9 @@ function useLink(props) {
     navigate
   };
 }
+function preferSingleVNode(vnodes) {
+  return vnodes.length === 1 ? vnodes[0] : vnodes;
+}
 var RouterLinkImpl = defineComponent({
   name: "RouterLink",
   compatConfig: { MODE: 3 },
@@ -1573,7 +1607,8 @@ var RouterLinkImpl = defineComponent({
     ariaCurrentValue: {
       type: String,
       default: "page"
-    }
+    },
+    viewTransition: Boolean
   },
   useLink,
   setup(props, { slots }) {
@@ -1589,7 +1624,7 @@ var RouterLinkImpl = defineComponent({
       [getLinkClass(props.exactActiveClass, options.linkExactActiveClass, "router-link-exact-active")]: link.isExactActive
     }));
     return () => {
-      const children = slots.default && slots.default(link);
+      const children = slots.default && preferSingleVNode(slots.default(link));
       return props.custom ? children : h("a", {
         "aria-current": link.isExactActive ? props.ariaCurrentValue : null,
         href: link.href,
@@ -2150,7 +2185,7 @@ function createRouter(options) {
   const stringifyQuery$1 = options.stringifyQuery || stringifyQuery;
   const routerHistory = options.history;
   if (!routerHistory)
-    throw new Error('Provide the "history" option when calling "createRouter()": https://next.router.vuejs.org/api/#history.');
+    throw new Error('Provide the "history" option when calling "createRouter()": https://router.vuejs.org/api/interfaces/RouterOptions.html#history');
   const beforeGuards = useCallbacks();
   const beforeResolveGuards = useCallbacks();
   const afterGuards = useCallbacks();
@@ -2497,7 +2532,7 @@ ${JSON.stringify(newTargetLocation, null, 2)}
       const toLocation = resolve(to);
       const shouldRedirect = handleRedirectRecord(toLocation);
       if (shouldRedirect) {
-        pushWithRedirect(assign(shouldRedirect, { replace: true }), toLocation).catch(noop);
+        pushWithRedirect(assign(shouldRedirect, { replace: true, force: true }), toLocation).catch(noop);
         return;
       }
       pendingLocation = toLocation;
@@ -2519,7 +2554,9 @@ ${JSON.stringify(newTargetLocation, null, 2)}
           /* ErrorTypes.NAVIGATION_GUARD_REDIRECT */
         )) {
           pushWithRedirect(
-            error.to,
+            assign(locationAsObject(error.to), {
+              force: true
+            }),
             toLocation
             // avoid an uncaught rejection, let push call triggerError
           ).then((failure) => {
@@ -2736,8 +2773,8 @@ export {
 
 vue-router/dist/vue-router.mjs:
   (*!
-    * vue-router v4.4.0
-    * (c) 2024 Eduardo San Martin Morote
+    * vue-router v4.5.1
+    * (c) 2025 Eduardo San Martin Morote
     * @license MIT
     *)
 */
