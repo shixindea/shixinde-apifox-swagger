@@ -503,12 +503,18 @@ function OrderComponent() {
 
 ### 类型说明
 
-- **`makeURL<TPaths, U, M>(url, method)`**: 创建类型安全的 URL 和方法组合
+- **`makeURL<TPaths, U, M>(url, method)`**: 创建类型安全的 URL 和方法组合，返回只读元组 `[url, method]`
 - **`MakeURL<TPaths, U, M>`**: 包含完整 API 信息的类型，包括请求参数和响应数据
 - **`MakeRequest<TPaths, U, M>`**: 请求参数类型，包括 query、pathParams、formData、jsonData
 - **`MakeResponse<TPaths, U, M>`**: 响应数据类型
 - **`InferMethodFromPaths<TPaths, U>`**: 从路径推断可用的 HTTP 方法
 - **`paths`**: 从 Swagger 文档生成的所有 API 路径的类型定义
+
+**重要提示**：
+- `makeURL` 函数主要用于运行时 URL 构建，返回元组类型
+- 进行类型推断时，应直接使用 `MakeURL<TPaths, U, M>` 类型，而不是从 `makeURL` 函数返回值推断
+- 错误用法：`type API = MakeURL<UserPaths, (typeof makeURL(...))[0], (typeof makeURL(...))[1]>`
+- 正确用法：`type API = MakeURL<UserPaths, '/api/path', 'get'>`
 
 其中：
 - `TPaths`: 从 Swagger 文档导入的 paths 类型
@@ -534,8 +540,10 @@ MIT
 
 ```typescript
 // src/api/types.ts - 导入生成的类型
+// 第一步：导入生成的 paths 类型
 import type { paths as UserPaths } from '../../output/swagger/all'
 
+// 第二步：导入类型工具
 import { 
   makeURL, 
   type MakeURL, 
@@ -544,10 +552,16 @@ import {
   type InferMethodFromPaths 
 } from '@shixinde/apifox-swagger/types'
 
-// 定义具体的 API 类型
+// 第三步：定义具体的 API 类型
 type ClassListAPI = MakeURL<UserPaths, '/api/org/class/list', 'get'>
 type ClassCreateAPI = MakeURL<UserPaths, '/api/org/class/create', 'post'>
 type ClassUpdateAPI = MakeURL<UserPaths, '/api/org/class/update', 'put'>
+
+// 注意：如果出现 "类型不能赋给类型never的参数" 错误，请检查：
+// 1. 是否正确导入了 paths 类型：import type { paths as UserPaths } from '../../output/swagger/all'
+// 2. 路径是否存在于 Swagger 文档中
+// 3. HTTP 方法是否正确
+// 4. 是否已经运行了代码生成命令：npx apifox-swagger
 
 // 创建类型安全的 URL
 const classListUrl = makeURL<UserPaths, '/api/org/class/list', 'get'>('/api/org/class/list', 'get')
@@ -555,8 +569,12 @@ const classCreateUrl = makeURL<UserPaths, '/api/org/class/create', 'post'>('/api
 const classUpdateUrl = makeURL<UserPaths, '/api/org/class/update', 'put'>('/api/org/class/update', 'put')
 
 // 更简洁的类型推断方式
-const url = makeURL('/api/org/class/list', 'get');
-type ClassListURL = MakeURL<UserPaths, (typeof url)[0], (typeof url)[1]>;
+// 注意：makeURL 函数返回的是元组，不能直接用于类型推断
+// 正确的方式是直接使用 MakeURL 类型
+type ClassListURL = MakeURL<UserPaths, '/api/org/class/list', 'get'>;
+
+// 如果需要运行时的 URL 构建，可以这样使用：
+const url = makeURL<UserPaths, '/api/org/class/list', 'get'>('/api/org/class/list', 'get');
 
 // 提取各种类型
 type Response = ClassListURL['responseData'];        // 响应数据类型
@@ -570,27 +588,28 @@ export type Classes = Response['data'];     // 班级列表数据类型
 export type ClassItem = Classes[0];        // 单个班级数据类型
 
 // 示例：不同 API 的类型提取
-const createUrl = makeURL('/api/org/class/create', 'post');
-type CreateURL = MakeURL<UserPaths, (typeof createUrl)[0], (typeof createUrl)[1]>;
+// 正确的方式：直接使用 MakeURL 类型
+type CreateURL = MakeURL<UserPaths, '/api/org/class/create', 'post'>;
 type CreateRequest = CreateURL['jsonData']; // 创建班级的请求数据类型
 type CreateResponse = CreateURL['responseData']; // 创建班级的响应数据类型
 
-const updateUrl = makeURL('/api/org/class/update', 'put');
-type UpdateURL = MakeURL<UserPaths, (typeof updateUrl)[0], (typeof updateUrl)[1]>;
+type UpdateURL = MakeURL<UserPaths, '/api/org/class/update', 'put'>;
 type UpdateRequest = UpdateURL['jsonData']; // 更新班级的请求数据类型
 type UpdatePathParams = UpdateURL['pathParams']; // 更新班级的路径参数类型（如 id）
 
 // 带查询参数的 API 示例
-const searchUrl = makeURL('/api/org/class/search', 'get');
-type SearchURL = MakeURL<UserPaths, (typeof searchUrl)[0], (typeof searchUrl)[1]>;
+type SearchURL = MakeURL<UserPaths, '/api/org/class/search', 'get'>;
 type SearchQuery = SearchURL['query'];      // 搜索查询参数类型（如 keyword, page, size）
 type SearchResponse = SearchURL['responseData']; // 搜索响应数据类型
 
 // 文件上传 API 示例
-const uploadUrl = makeURL('/api/org/class/upload', 'post');
-type UploadURL = MakeURL<UserPaths, (typeof uploadUrl)[0], (typeof uploadUrl)[1]>;
+type UploadURL = MakeURL<UserPaths, '/api/org/class/upload', 'post'>;
 type UploadFormData = UploadURL['formData']; // 文件上传表单数据类型
 type UploadResponse = UploadURL['responseData']; // 文件上传响应数据类型
+
+// 如果需要运行时 URL 构建，可以这样使用：
+const createUrl = makeURL<UserPaths, '/api/org/class/create', 'post'>('/api/org/class/create', 'post');
+const updateUrl = makeURL<UserPaths, '/api/org/class/update', 'put'>('/api/org/class/update', 'put');
 
 // 通用 API 调用函数
 function apiCall<
