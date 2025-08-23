@@ -6,7 +6,8 @@ import { zhSidebar, enSidebar, } from './sidebar/switch.js'
 import { searchProPlugin } from "vuepress-plugin-search-pro";
 export default defineUserConfig({
     "title": "@shixinde/apifox-swagger",
-    "description": "袁果锅开发工具类",
+    "description": "一个用于从 Apifox 导出 Swagger/OpenAPI 文档并生成 TypeScript 类型定义的工具。",
+    "keywords": ["@shixinde", "袁果锅", "Guoguo", "apifox", "swagger", "openapi", "typescript", "生成", "工具"],
     port: '6688', //端口号
     "dest": "docs",
     base:"/shixinde-apifox-swagger-docs/",
