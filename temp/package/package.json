@@ -1,0 +1,81 @@
+{
+  "name": "@shixinde/apifox-swagger",
+  "version": "3.5.2",
+  "author": "袁果锅",
+  "type": "module",
+  "description": "从 Apifox 导出 Swagger/OpenAPI 文档并生成 TypeScript 类型定义的工具",
+  "keywords": [
+    "@shixinde",
+    "apifox-swagger",
+    "袁果锅",
+    "apifox",
+    "swagger",
+    "openapi",
+    "typescript",
+    "api",
+    "documentation",
+    "cli"
+  ],
+  "scripts": {
+    "start": "vite",
+    "build": "./release.sh  && npm version patch && npm publish",
+    "preview": "vite preview",
+    "release": "./release.sh",
+    "docs:dev": "vuepress dev docs-vuepress",
+    "docs:build": "vuepress build docs-vuepress",
+    "export-api": "node scripts/export-api.js"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "apifox-swagger": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./cli": "./dist/cli.js",
+    "./types": {
+      "import": "./dist/types-template.js",
+      "require": "./dist/types-template.cjs",
+      "types": "./dist/types-template.d.ts"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shixindea/shixinde-apifox-swagger.git"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json",
+    "readme.md"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vuepress/bundler-vite": "2.0.0-rc.14",
+    "@vuepress/theme-default": "2.0.0-rc.37",
+    "cz-git": "^1.9.3",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.5.2",
+    "vue": "^3.4.31",
+    "vuepress": "2.0.0-rc.14"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@shixinde/apifox-swagger": "file:shixinde-apifox-swagger-3.5.2.tgz",
+    "@shixinde/guoguo-cz": "^0.0.2",
+    "commander": "^14.0.0",
+    "fs-extra": "^11.3.1",
+    "openapi-typescript": "^7.9.1",
+    "tiny-invariant": "^1.3.3",
+    "undici": "^7.13.0",
+    "vuepress-plugin-search-pro": "^2.0.0-rc.50"
+  }
+}
