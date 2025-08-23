@@ -1,16 +1,3 @@
 import comp from "/Users/guoguo/code/my-project/shixinde-apifox-swagger/docs-vuepress/.vuepress/.temp/pages/installation.html.vue"
-const data = JSON.parse("{\"path\":\"/installation.html\",\"title\":\"安装\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"系统要求\",\"slug\":\"系统要求\",\"link\":\"#系统要求\",\"children\":[]},{\"level\":2,\"title\":\"安装方式\",\"slug\":\"安装方式\",\"link\":\"#安装方式\",\"children\":[{\"level\":3,\"title\":\"使用 npm\",\"slug\":\"使用-npm\",\"link\":\"#使用-npm\",\"children\":[]},{\"level\":3,\"title\":\"使用 yarn\",\"slug\":\"使用-yarn\",\"link\":\"#使用-yarn\",\"children\":[]},{\"level\":3,\"title\":\"使用 pnpm\",\"slug\":\"使用-pnpm\",\"link\":\"#使用-pnpm\",\"children\":[]}]},{\"level\":2,\"title\":\"全局安装\",\"slug\":\"全局安装\",\"link\":\"#全局安装\",\"children\":[]},{\"level\":2,\"title\":\"验证安装\",\"slug\":\"验证安装\",\"link\":\"#验证安装\",\"children\":[]},{\"level\":2,\"title\":\"下一步\",\"slug\":\"下一步\",\"link\":\"#下一步\",\"children\":[]}],\"git\":{\"updatedTime\":null,\"contributors\":[]},\"filePathRelative\":\"installation.md\",\"excerpt\":\"\\n<h2>系统要求</h2>\\n<ul>\\n<li>Node.js 14.0 或更高版本</li>\\n<li>npm、yarn 或 pnpm 包管理器</li>\\n</ul>\\n<h2>安装方式</h2>\\n<h3>使用 npm</h3>\\n<div class=\\\"language-bash\\\" data-highlighter=\\\"prismjs\\\" data-ext=\\\"sh\\\" data-title=\\\"sh\\\"><pre class=\\\"language-bash\\\"><code><span class=\\\"line\\\"><span class=\\\"token function\\\">npm</span> <span class=\\\"token function\\\">install</span> @shixinde/apifox-swagger</span>\\n<span class=\\\"line\\\"></span></code></pre></div>\"}")
+const data = JSON.parse("{\"path\":\"/installation.html\",\"title\":\"安装\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"系统要求\",\"slug\":\"系统要求\",\"link\":\"#系统要求\",\"children\":[]},{\"level\":2,\"title\":\"安装方式\",\"slug\":\"安装方式\",\"link\":\"#安装方式\",\"children\":[{\"level\":3,\"title\":\"使用 npm\",\"slug\":\"使用-npm\",\"link\":\"#使用-npm\",\"children\":[]},{\"level\":3,\"title\":\"使用 yarn\",\"slug\":\"使用-yarn\",\"link\":\"#使用-yarn\",\"children\":[]},{\"level\":3,\"title\":\"使用 pnpm\",\"slug\":\"使用-pnpm\",\"link\":\"#使用-pnpm\",\"children\":[]}]},{\"level\":2,\"title\":\"全局安装\",\"slug\":\"全局安装\",\"link\":\"#全局安装\",\"children\":[]},{\"level\":2,\"title\":\"验证安装\",\"slug\":\"验证安装\",\"link\":\"#验证安装\",\"children\":[]},{\"level\":2,\"title\":\"下一步\",\"slug\":\"下一步\",\"link\":\"#下一步\",\"children\":[]}],\"git\":{\"updatedTime\":1755954144000,\"contributors\":[{\"name\":\"袁果锅\",\"email\":\"2914310412@qq.com\",\"commits\":1}]},\"filePathRelative\":\"installation.md\",\"excerpt\":\"\\n<h2>系统要求</h2>\\n<ul>\\n<li>Node.js 14.0 或更高版本</li>\\n<li>npm、yarn 或 pnpm 包管理器</li>\\n</ul>\\n<h2>安装方式</h2>\\n<h3>使用 npm</h3>\\n<div class=\\\"language-bash\\\" data-highlighter=\\\"prismjs\\\" data-ext=\\\"sh\\\" data-title=\\\"sh\\\"><pre class=\\\"language-bash\\\"><code><span class=\\\"line\\\"><span class=\\\"token function\\\">npm</span> <span class=\\\"token function\\\">install</span> @shixinde/apifox-swagger</span>\\n<span class=\\\"line\\\"></span></code></pre></div>\"}")
 export { comp, data }
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updatePageData) {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ data }) => {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  })
-}

@@ -23,6 +23,7 @@
     "release": "./release.sh",
     "docs:dev": "vuepress dev docs-vuepress",
     "docs:build": "vuepress build docs-vuepress",
+    "docs:preview": "./preview_docs.sh",
     "export-api": "node scripts/export-api.js"
   },
   "main": "./dist/index.cjs",
