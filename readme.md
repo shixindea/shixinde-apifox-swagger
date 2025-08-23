@@ -554,6 +554,44 @@ const classListUrl = makeURL<UserPaths, '/api/org/class/list', 'get'>('/api/org/
 const classCreateUrl = makeURL<UserPaths, '/api/org/class/create', 'post'>('/api/org/class/create', 'post')
 const classUpdateUrl = makeURL<UserPaths, '/api/org/class/update', 'put'>('/api/org/class/update', 'put')
 
+// 更简洁的类型推断方式
+const url = makeURL('/api/org/class/list', 'get');
+type ClassListURL = MakeURL<UserPaths, (typeof url)[0], (typeof url)[1]>;
+
+// 提取各种类型
+type Response = ClassListURL['responseData'];        // 响应数据类型
+type Query = ClassListURL['query'];                  // 查询参数类型
+type PathParams = ClassListURL['pathParams'];        // 路径参数类型
+type FormData = ClassListURL['formData'];            // 表单数据类型
+type JsonData = ClassListURL['jsonData'];            // JSON 数据类型
+
+// 导出具体的业务类型
+export type Classes = Response['data'];     // 班级列表数据类型
+export type ClassItem = Classes[0];        // 单个班级数据类型
+
+// 示例：不同 API 的类型提取
+const createUrl = makeURL('/api/org/class/create', 'post');
+type CreateURL = MakeURL<UserPaths, (typeof createUrl)[0], (typeof createUrl)[1]>;
+type CreateRequest = CreateURL['jsonData']; // 创建班级的请求数据类型
+type CreateResponse = CreateURL['responseData']; // 创建班级的响应数据类型
+
+const updateUrl = makeURL('/api/org/class/update', 'put');
+type UpdateURL = MakeURL<UserPaths, (typeof updateUrl)[0], (typeof updateUrl)[1]>;
+type UpdateRequest = UpdateURL['jsonData']; // 更新班级的请求数据类型
+type UpdatePathParams = UpdateURL['pathParams']; // 更新班级的路径参数类型（如 id）
+
+// 带查询参数的 API 示例
+const searchUrl = makeURL('/api/org/class/search', 'get');
+type SearchURL = MakeURL<UserPaths, (typeof searchUrl)[0], (typeof searchUrl)[1]>;
+type SearchQuery = SearchURL['query'];      // 搜索查询参数类型（如 keyword, page, size）
+type SearchResponse = SearchURL['responseData']; // 搜索响应数据类型
+
+// 文件上传 API 示例
+const uploadUrl = makeURL('/api/org/class/upload', 'post');
+type UploadURL = MakeURL<UserPaths, (typeof uploadUrl)[0], (typeof uploadUrl)[1]>;
+type UploadFormData = UploadURL['formData']; // 文件上传表单数据类型
+type UploadResponse = UploadURL['responseData']; // 文件上传响应数据类型
+
 // 通用 API 调用函数
 function apiCall<
   U extends keyof UserPaths,
@@ -579,6 +617,81 @@ function apiCall<
     return res.json()
   })
 }
+
+// 实际使用示例
+async function examples() {
+  // 1. 获取班级列表（GET 请求，带查询参数）
+  const classList = await apiCall('/api/org/class/list', 'get', {
+    query: {
+      page: 1,
+      size: 10,
+      keyword: '高一'
+    }
+  });
+  // classList 的类型会被自动推断为对应的响应类型
+  console.log(classList.data); // 类型安全的访问
+
+  // 2. 创建班级（POST 请求，带 JSON 数据）
+  const newClass = await apiCall('/api/org/class/create', 'post', {
+    jsonData: {
+      name: '高一(1)班',
+      teacherId: 123,
+      capacity: 50
+    }
+  });
+  console.log(newClass.data.id); // 新创建班级的 ID
+
+  // 3. 更新班级（PUT 请求，带路径参数和 JSON 数据）
+  const updatedClass = await apiCall('/api/org/class/update', 'put', {
+    pathParams: {
+      id: 456
+    },
+    jsonData: {
+      name: '高一(2)班',
+      capacity: 45
+    }
+  });
+  console.log(updatedClass.message); // 更新结果消息
+
+  // 4. 文件上传（POST 请求，带表单数据）
+  const uploadResult = await apiCall('/api/org/class/upload', 'post', {
+    formData: {
+      file: new File([''], 'students.xlsx'),
+      classId: 789
+    }
+  });
+  console.log(uploadResult.data.uploadedCount); // 上传的学生数量
+}
+
+// 类型提取的高级用法
+type ApiEndpoints = {
+  // 班级相关 API
+  classList: MakeURL<UserPaths, '/api/org/class/list', 'get'>;
+  classCreate: MakeURL<UserPaths, '/api/org/class/create', 'post'>;
+  classUpdate: MakeURL<UserPaths, '/api/org/class/update', 'put'>;
+  classUpload: MakeURL<UserPaths, '/api/org/class/upload', 'post'>;
+};
+
+// 提取所有响应类型
+type ApiResponses = {
+  [K in keyof ApiEndpoints]: ApiEndpoints[K]['responseData'];
+};
+
+// 提取所有请求类型
+type ApiRequests = {
+  [K in keyof ApiEndpoints]: {
+    query: ApiEndpoints[K]['query'];
+    pathParams: ApiEndpoints[K]['pathParams'];
+    jsonData: ApiEndpoints[K]['jsonData'];
+    formData: ApiEndpoints[K]['formData'];
+  };
+};
+
+// 业务层类型定义
+export type ClassListResponse = ApiResponses['classList'];
+export type ClassCreateRequest = ApiRequests['classCreate']['jsonData'];
+export type ClassUpdateRequest = ApiRequests['classUpdate']['jsonData'];
+export type ClassUploadFormData = ApiRequests['classUpload']['formData'];
 
 // 具体的 API 调用函数
 export const classAPI = {

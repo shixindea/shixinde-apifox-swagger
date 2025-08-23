@@ -69,7 +69,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@shixinde/apifox-swagger": "file:shixinde-apifox-swagger-3.5.2.tgz",
     "@shixinde/guoguo-cz": "^0.0.2",
     "commander": "^14.0.0",
     "fs-extra": "^11.3.1",
