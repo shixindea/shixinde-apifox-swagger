@@ -1,6 +1,6 @@
 {
   "name": "@shixinde/apifox-swagger",
-  "version": "3.5.4",
+  "version": "4.0.0",
   "author": "袁果锅",
   "type": "module",
   "description": "从 Apifox 导出 Swagger/OpenAPI 文档并生成 TypeScript 类型定义的工具",
@@ -49,6 +49,7 @@
     "type": "git",
     "url": "git+https://github.com/shixindea/shixinde-apifox-swagger.git"
   },
+  "homepage": "https://shixindea.github.io/shixinde-apifox-swagger-docs/",
   "files": [
     "dist/**/*",
     "package.json",
