@@ -19,7 +19,7 @@
 <td><code v-pre>--projectId &lt;id&gt;</code></td>
 <td>string</td>
 <td>Apifox 项目 ID</td>
-<td><code v-pre>--projectId 2364643</code></td>
+<td><code v-pre>--projectId 266643</code></td>
 </tr>
 <tr>
 <td><code v-pre>--outdir &lt;path&gt;</code></td>
@@ -107,28 +107,28 @@
 <h2 id="使用示例" tabindex="-1"><a class="header-anchor" href="#使用示例"><span>使用示例</span></a></h2>
 <h3 id="_1-基本导出" tabindex="-1"><a class="header-anchor" href="#_1-基本导出"><span>1. 基本导出</span></a></h3>
 <p>导出整个项目的 API 文档：</p>
-<div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--outdir</span> ./output</span>
+<div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="_2-使用访问令牌" tabindex="-1"><a class="header-anchor" href="#_2-使用访问令牌"><span>2. 使用访问令牌</span></a></h3>
 <p>直接在命令中指定访问令牌：</p>
-<div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--token</span> your-access-token <span class="token parameter variable">--outdir</span> ./output</span>
+<div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--token</span> your-access-token <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="_3-导出指定文件夹" tabindex="-1"><a class="header-anchor" href="#_3-导出指定文件夹"><span>3. 导出指定文件夹</span></a></h3>
 <p>只导出特定文件夹的 API：</p>
 <div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line"><span class="token comment"># 使用文件夹 ID</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--folderId</span> <span class="token number">123456</span> <span class="token parameter variable">--outdir</span> ./output</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--folderId</span> <span class="token number">123456</span> <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 使用文件夹名称</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--folderName</span> <span class="token string">"用户模块"</span> <span class="token parameter variable">--outdir</span> ./output</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--folderName</span> <span class="token string">"用户模块"</span> <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 同时指定文件夹 ID 和名称</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--folderId</span> <span class="token number">123456</span> <span class="token parameter variable">--folderName</span> <span class="token string">"用户模块"</span> <span class="token parameter variable">--outdir</span> ./output</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--folderId</span> <span class="token number">123456</span> <span class="token parameter variable">--folderName</span> <span class="token string">"用户模块"</span> <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_4-环境变量配合使用" tabindex="-1"><a class="header-anchor" href="#_4-环境变量配合使用"><span>4. 环境变量配合使用</span></a></h3>
 <p>设置环境变量后简化命令：</p>
 <div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line"><span class="token comment"># 设置环境变量</span></span>
 <span class="line"><span class="token builtin class-name">export</span> <span class="token assign-left variable">APIFOX_ACCESS_TOKEN</span><span class="token operator">=</span>your-access-token</span>
-<span class="line"><span class="token builtin class-name">export</span> <span class="token assign-left variable">APIFOX_PROJECT_ID</span><span class="token operator">=</span><span class="token number">2364643</span></span>
+<span class="line"><span class="token builtin class-name">export</span> <span class="token assign-left variable">APIFOX_PROJECT_ID</span><span class="token operator">=</span><span class="token number">266643</span></span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 简化的命令</span></span>
 <span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token variable">$APIFOX_PROJECT_ID</span> <span class="token parameter variable">--outdir</span> ./output</span>
@@ -137,9 +137,9 @@
 <p>将命令添加到 npm scripts：</p>
 <div class="language-json line-numbers-mode" data-highlighter="prismjs" data-ext="json" data-title="json"><pre v-pre class="language-json"><code><span class="line"><span class="token punctuation">{</span></span>
 <span class="line">  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token property">"export-api"</span><span class="token operator">:</span> <span class="token string">"apifox-swagger --projectId 2364643 --outdir ./src/types"</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token property">"export-user-api"</span><span class="token operator">:</span> <span class="token string">"apifox-swagger --projectId 2364643 --folderName \"用户模块\" --outdir ./src/types/user"</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token property">"export-order-api"</span><span class="token operator">:</span> <span class="token string">"apifox-swagger --projectId 2364643 --folderName \"订单模块\" --outdir ./src/types/order"</span></span>
+<span class="line">    <span class="token property">"export-api"</span><span class="token operator">:</span> <span class="token string">"apifox-swagger --projectId 266643 --outdir ./src/types"</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token property">"export-user-api"</span><span class="token operator">:</span> <span class="token string">"apifox-swagger --projectId 266643 --folderName \"用户模块\" --outdir ./src/types/user"</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token property">"export-order-api"</span><span class="token operator">:</span> <span class="token string">"apifox-swagger --projectId 266643 --folderName \"订单模块\" --outdir ./src/types/order"</span></span>
 <span class="line">  <span class="token punctuation">}</span></span>
 <span class="line"><span class="token punctuation">}</span></span>
 <span class="line"></span></code></pre>
@@ -157,15 +157,15 @@
 <span class="line"><span class="token builtin class-name">echo</span> <span class="token string">"开始导出 API 文档..."</span></span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 导出用户模块</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--folderName</span> <span class="token string">"用户模块"</span> <span class="token parameter variable">--outdir</span> ./src/types/user</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--folderName</span> <span class="token string">"用户模块"</span> <span class="token parameter variable">--outdir</span> ./src/types/user</span>
 <span class="line"><span class="token builtin class-name">echo</span> <span class="token string">"用户模块导出完成"</span></span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 导出订单模块</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--folderName</span> <span class="token string">"订单模块"</span> <span class="token parameter variable">--outdir</span> ./src/types/order</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--folderName</span> <span class="token string">"订单模块"</span> <span class="token parameter variable">--outdir</span> ./src/types/order</span>
 <span class="line"><span class="token builtin class-name">echo</span> <span class="token string">"订单模块导出完成"</span></span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 导出产品模块</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--folderName</span> <span class="token string">"产品模块"</span> <span class="token parameter variable">--outdir</span> ./src/types/product</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--folderName</span> <span class="token string">"产品模块"</span> <span class="token parameter variable">--outdir</span> ./src/types/product</span>
 <span class="line"><span class="token builtin class-name">echo</span> <span class="token string">"产品模块导出完成"</span></span>
 <span class="line"></span>
 <span class="line"><span class="token builtin class-name">echo</span> <span class="token string">"所有模块导出完成！"</span></span>
@@ -202,7 +202,7 @@
 <span class="line">        <span class="token key atrule">env</span><span class="token punctuation">:</span></span>
 <span class="line">          <span class="token key atrule">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.APIFOX_ACCESS_TOKEN <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
 <span class="line">        <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string"></span>
-<span class="line">          npx apifox-swagger --projectId 2364643 --outdir ./src/types</span></span>
+<span class="line">          npx apifox-swagger --projectId 266643 --outdir ./src/types</span></span>
 <span class="line">          </span>
 <span class="line">      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Commit changes</span>
 <span class="line">        <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string"></span>
@@ -259,17 +259,17 @@
 <span class="line"><span class="token builtin class-name">export</span> <span class="token assign-left variable">DEBUG</span><span class="token operator">=</span>apifox-swagger:*</span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 运行命令</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--outdir</span> ./output</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="性能优化" tabindex="-1"><a class="header-anchor" href="#性能优化"><span>性能优化</span></a></h2>
 <h3 id="_1-并行导出" tabindex="-1"><a class="header-anchor" href="#_1-并行导出"><span>1. 并行导出</span></a></h3>
 <p>对于大型项目，可以并行导出不同模块：</p>
 <div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line"><span class="token comment"># 使用 GNU parallel（如果可用）</span></span>
 <span class="line">parallel <span class="token parameter variable">-j</span> <span class="token number">4</span> ::: <span class="token punctuation">\</span></span>
-<span class="line">  <span class="token string">"apifox-swagger --projectId 2364643 --folderName '用户模块' --outdir ./types/user"</span> <span class="token punctuation">\</span></span>
-<span class="line">  <span class="token string">"apifox-swagger --projectId 2364643 --folderName '订单模块' --outdir ./types/order"</span> <span class="token punctuation">\</span></span>
-<span class="line">  <span class="token string">"apifox-swagger --projectId 2364643 --folderName '产品模块' --outdir ./types/product"</span> <span class="token punctuation">\</span></span>
-<span class="line">  <span class="token string">"apifox-swagger --projectId 2364643 --folderName '支付模块' --outdir ./types/payment"</span></span>
+<span class="line">  <span class="token string">"apifox-swagger --projectId 266643 --folderName '用户模块' --outdir ./types/user"</span> <span class="token punctuation">\</span></span>
+<span class="line">  <span class="token string">"apifox-swagger --projectId 266643 --folderName '订单模块' --outdir ./types/order"</span> <span class="token punctuation">\</span></span>
+<span class="line">  <span class="token string">"apifox-swagger --projectId 266643 --folderName '产品模块' --outdir ./types/product"</span> <span class="token punctuation">\</span></span>
+<span class="line">  <span class="token string">"apifox-swagger --projectId 266643 --folderName '支付模块' --outdir ./types/payment"</span></span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-缓存策略" tabindex="-1"><a class="header-anchor" href="#_2-缓存策略"><span>2. 缓存策略</span></a></h3>
 <p>实现简单的缓存机制：</p>
@@ -291,7 +291,7 @@
 <span class="line"><span class="token keyword">fi</span></span>
 <span class="line"></span>
 <span class="line"><span class="token builtin class-name">echo</span> <span class="token string">"导出新的 API 文档..."</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--outdir</span> ./output</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$?</span> <span class="token parameter variable">-eq</span> <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span></span>
 <span class="line">  <span class="token builtin class-name">echo</span> <span class="token variable">$CURRENT_TIME</span> <span class="token operator">></span> <span class="token string">"<span class="token variable">$CACHE_FILE</span>"</span></span>

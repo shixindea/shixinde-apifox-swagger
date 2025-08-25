@@ -15,7 +15,7 @@
 
 1. 在 Apifox 中打开你的项目
 2. 查看浏览器地址栏，URL 中包含项目 ID
-3. 例如：`https://www.apifox.cn/web/project/2364643` 中的 `2364643` 就是项目 ID
+3. 例如：`https://www.apifox.cn/web/project/2666643` 中的 `2666643` 就是项目 ID
 
 ## 第一次使用
 
@@ -23,14 +23,14 @@
 
 ```bash
 # 基本导出
-apifox-swagger --projectId 2364643 --outdir ./output
+apifox-swagger --projectId 266643 --outdir ./output
 
 # 使用环境变量设置令牌
 export APIFOX_ACCESS_TOKEN=your-access-token
-apifox-swagger --projectId 2364643 --outdir ./output
+apifox-swagger --projectId 266643 --outdir ./output
 
 # 或直接在命令中指定令牌
-apifox-swagger --projectId 2364643 --token your-access-token --outdir ./output
+apifox-swagger --projectId 266643 --token your-access-token --outdir ./output
 ```
 
 ### 方式二：编程接口
@@ -44,7 +44,7 @@ import { exportSwagger } from '@shixinde/apifox-swagger';
 async function main() {
   try {
     const result = await exportSwagger({
-      projectId: '2364643',
+      projectId: '266643',
       token: 'your-access-token', // 或使用环境变量
       outdir: './output'
     });

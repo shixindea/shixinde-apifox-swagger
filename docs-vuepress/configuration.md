@@ -9,7 +9,7 @@
 ```bash
 # .env 文件
 APIFOX_ACCESS_TOKEN=your-access-token
-APIFOX_PROJECT_ID=2364643
+APIFOX_PROJECT_ID=266643
 APIFOX_BASE_URL=https://api.apifox.cn
 OUTPUT_DIR=./src/types
 ```
@@ -21,7 +21,7 @@ OUTPUT_DIR=./src/types
 ```javascript
 export default {
   // 基本配置
-  projectId: '2364643',
+  projectId: '266643',
   token: process.env.APIFOX_ACCESS_TOKEN,
   outdir: './src/types',
   
@@ -54,7 +54,7 @@ export default {
 
 ```json
 {
-  "projectId": "2364643",
+  "projectId": "266643",
   "outdir": "./src/types",
   "useLocal": false,
   "modules": [
@@ -72,7 +72,7 @@ export default {
 ```json
 {
   "apifox": {
-    "projectId": "2364643",
+    "projectId": "266643",
     "outdir": "./src/types",
     "modules": [
       {
@@ -92,7 +92,7 @@ export default {
 - **类型**: `string`
 - **必需**: 是（云端模式）
 - **描述**: Apifox 项目 ID
-- **示例**: `"2364643"`
+- **示例**: `"266643"`
 
 #### token
 - **类型**: `string`
@@ -185,7 +185,7 @@ interface ModuleConfig {
 ```javascript
 // apifox.config.js
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   token: process.env.APIFOX_ACCESS_TOKEN,
   outdir: './src/api/types'
 };
@@ -196,7 +196,7 @@ export default {
 ```javascript
 // apifox.config.js
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   token: process.env.APIFOX_ACCESS_TOKEN,
   outdir: './src/types',
   
@@ -233,7 +233,7 @@ export default {
 ```javascript
 // apifox.config.dev.js
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   token: process.env.APIFOX_ACCESS_TOKEN,
   outdir: './src/types',
   
@@ -256,7 +256,7 @@ export default {
 ```javascript
 // apifox.config.prod.js
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   token: process.env.APIFOX_ACCESS_TOKEN,
   outdir: './dist/types',
   
@@ -322,7 +322,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const isProd = process.env.NODE_ENV === 'production';
 
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   token: process.env.APIFOX_ACCESS_TOKEN,
   outdir: isDev ? './src/types' : './dist/types',
   
@@ -350,7 +350,7 @@ const currentBranch = execSync('git branch --show-current', { encoding: 'utf8' }
 
 const branchConfigs = {
   'main': {
-    projectId: '2364643', // 生产项目
+    projectId: '266643', // 生产项目
     modules: [
       { name: '用户模块', folderId: '123456' },
       { name: '订单模块', folderId: '123457' }
@@ -417,7 +417,7 @@ const userConfigs = {
 };
 
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   token: process.env.APIFOX_ACCESS_TOKEN,
   outdir: './src/types',
   

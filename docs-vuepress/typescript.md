@@ -30,7 +30,7 @@ graph LR
 
 ```bash
 # 导出 API 文档并生成类型
-apifox-swagger --projectId 2364643 --outdir ./src/types
+apifox-swagger --projectId 266643 --outdir ./src/types
 ```
 
 生成的文件结构：
@@ -690,7 +690,7 @@ const safeApiCall = withErrorHandling(apiCall);
   "scripts": {
     "dev": "npm run export-api && vite",
     "build": "npm run export-api && vite build",
-    "export-api": "apifox-swagger --projectId 2364643 --outdir ./src/types",
+    "export-api": "apifox-swagger --projectId 266643 --outdir ./src/types",
     "watch-api": "nodemon --watch apifox.config.js --exec \"npm run export-api\""
   }
 }

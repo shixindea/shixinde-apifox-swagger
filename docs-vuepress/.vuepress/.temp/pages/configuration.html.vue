@@ -4,7 +4,7 @@
 <h3 id="_1-环境变量" tabindex="-1"><a class="header-anchor" href="#_1-环境变量"><span>1. 环境变量</span></a></h3>
 <div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line"><span class="token comment"># .env 文件</span></span>
 <span class="line"><span class="token assign-left variable">APIFOX_ACCESS_TOKEN</span><span class="token operator">=</span>your-access-token</span>
-<span class="line"><span class="token assign-left variable">APIFOX_PROJECT_ID</span><span class="token operator">=</span><span class="token number">2364643</span></span>
+<span class="line"><span class="token assign-left variable">APIFOX_PROJECT_ID</span><span class="token operator">=</span><span class="token number">266643</span></span>
 <span class="line"><span class="token assign-left variable">APIFOX_BASE_URL</span><span class="token operator">=</span>https://api.apifox.cn</span>
 <span class="line"><span class="token assign-left variable">OUTPUT_DIR</span><span class="token operator">=</span>./src/types</span>
 <span class="line"></span></code></pre>
@@ -12,7 +12,7 @@
 <h4 id="apifox-config-js-推荐" tabindex="-1"><a class="header-anchor" href="#apifox-config-js-推荐"><span>apifox.config.js（推荐）</span></a></h4>
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre class="language-javascript"><code><span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
 <span class="line">  <span class="token comment">// 基本配置</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types'</span><span class="token punctuation">,</span></span>
 <span class="line">  </span>
@@ -42,7 +42,7 @@
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h4 id="apifox-config-json" tabindex="-1"><a class="header-anchor" href="#apifox-config-json"><span>apifox.config.json</span></a></h4>
 <div class="language-json line-numbers-mode" data-highlighter="prismjs" data-ext="json" data-title="json"><pre v-pre class="language-json"><code><span class="line"><span class="token punctuation">{</span></span>
-<span class="line">  <span class="token property">"projectId"</span><span class="token operator">:</span> <span class="token string">"2364643"</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token property">"projectId"</span><span class="token operator">:</span> <span class="token string">"266643"</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token property">"outdir"</span><span class="token operator">:</span> <span class="token string">"./src/types"</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token property">"useLocal"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token property">"modules"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
@@ -57,7 +57,7 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-package-json-配置" tabindex="-1"><a class="header-anchor" href="#_3-package-json-配置"><span>3. package.json 配置</span></a></h3>
 <div class="language-json line-numbers-mode" data-highlighter="prismjs" data-ext="json" data-title="json"><pre v-pre class="language-json"><code><span class="line"><span class="token punctuation">{</span></span>
 <span class="line">  <span class="token property">"apifox"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token property">"projectId"</span><span class="token operator">:</span> <span class="token string">"2364643"</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token property">"projectId"</span><span class="token operator">:</span> <span class="token string">"266643"</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token property">"outdir"</span><span class="token operator">:</span> <span class="token string">"./src/types"</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token property">"modules"</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
 <span class="line">      <span class="token punctuation">{</span></span>
@@ -75,7 +75,7 @@
 <li><strong>类型</strong>: <code v-pre>string</code></li>
 <li><strong>必需</strong>: 是（云端模式）</li>
 <li><strong>描述</strong>: Apifox 项目 ID</li>
-<li><strong>示例</strong>: <code v-pre>&quot;2364643&quot;</code></li>
+<li><strong>示例</strong>: <code v-pre>&quot;266643&quot;</code></li>
 </ul>
 <h4 id="token" tabindex="-1"><a class="header-anchor" href="#token"><span>token</span></a></h4>
 <ul>
@@ -170,7 +170,7 @@
 <h3 id="_1-简单项目配置" tabindex="-1"><a class="header-anchor" href="#_1-简单项目配置"><span>1. 简单项目配置</span></a></h3>
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre class="language-javascript"><code><span class="line"><span class="token comment">// apifox.config.js</span></span>
 <span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/api/types'</span></span>
 <span class="line"><span class="token punctuation">}</span><span class="token punctuation">;</span></span>
@@ -178,7 +178,7 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-多模块项目配置" tabindex="-1"><a class="header-anchor" href="#_2-多模块项目配置"><span>2. 多模块项目配置</span></a></h3>
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre class="language-javascript"><code><span class="line"><span class="token comment">// apifox.config.js</span></span>
 <span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types'</span><span class="token punctuation">,</span></span>
 <span class="line">  </span>
@@ -212,7 +212,7 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3-开发环境配置" tabindex="-1"><a class="header-anchor" href="#_3-开发环境配置"><span>3. 开发环境配置</span></a></h3>
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre class="language-javascript"><code><span class="line"><span class="token comment">// apifox.config.dev.js</span></span>
 <span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types'</span><span class="token punctuation">,</span></span>
 <span class="line">  </span>
@@ -232,7 +232,7 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_4-生产环境配置" tabindex="-1"><a class="header-anchor" href="#_4-生产环境配置"><span>4. 生产环境配置</span></a></h3>
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre class="language-javascript"><code><span class="line"><span class="token comment">// apifox.config.prod.js</span></span>
 <span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./dist/types'</span><span class="token punctuation">,</span></span>
 <span class="line">  </span>
@@ -325,7 +325,7 @@
 <span class="line"><span class="token keyword">const</span> isProd <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">===</span> <span class="token string">'production'</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">outdir</span><span class="token operator">:</span> isDev <span class="token operator">?</span> <span class="token string">'./src/types'</span> <span class="token operator">:</span> <span class="token string">'./dist/types'</span><span class="token punctuation">,</span></span>
 <span class="line">  </span>
@@ -350,7 +350,7 @@
 <span class="line"></span>
 <span class="line"><span class="token keyword">const</span> branchConfigs <span class="token operator">=</span> <span class="token punctuation">{</span></span>
 <span class="line">  <span class="token string-property property">'main'</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
-<span class="line">    <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span> <span class="token comment">// 生产项目</span></span>
+<span class="line">    <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span> <span class="token comment">// 生产项目</span></span>
 <span class="line">    <span class="token literal-property property">modules</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
 <span class="line">      <span class="token punctuation">{</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'用户模块'</span><span class="token punctuation">,</span> <span class="token literal-property property">folderId</span><span class="token operator">:</span> <span class="token string">'123456'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token punctuation">{</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'订单模块'</span><span class="token punctuation">,</span> <span class="token literal-property property">folderId</span><span class="token operator">:</span> <span class="token string">'123457'</span> <span class="token punctuation">}</span></span>
@@ -414,7 +414,7 @@
 <span class="line"><span class="token punctuation">}</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
 <span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types'</span><span class="token punctuation">,</span></span>
 <span class="line">  </span>

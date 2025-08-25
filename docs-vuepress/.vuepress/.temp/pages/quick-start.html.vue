@@ -12,19 +12,19 @@
 <ol>
 <li>在 Apifox 中打开你的项目</li>
 <li>查看浏览器地址栏，URL 中包含项目 ID</li>
-<li>例如：<code v-pre>https://www.apifox.cn/web/project/2364643</code> 中的 <code v-pre>2364643</code> 就是项目 ID</li>
+<li>例如：<code v-pre>https://www.apifox.cn/web/project/266643</code> 中的 <code v-pre>266643</code> 就是项目 ID</li>
 </ol>
 <h2 id="第一次使用" tabindex="-1"><a class="header-anchor" href="#第一次使用"><span>第一次使用</span></a></h2>
 <h3 id="方式一-命令行工具-推荐新手" tabindex="-1"><a class="header-anchor" href="#方式一-命令行工具-推荐新手"><span>方式一：命令行工具（推荐新手）</span></a></h3>
 <div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line"><span class="token comment"># 基本导出</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--outdir</span> ./output</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 使用环境变量设置令牌</span></span>
 <span class="line"><span class="token builtin class-name">export</span> <span class="token assign-left variable">APIFOX_ACCESS_TOKEN</span><span class="token operator">=</span>your-access-token</span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--outdir</span> ./output</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span>
 <span class="line"><span class="token comment"># 或直接在命令中指定令牌</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--token</span> your-access-token <span class="token parameter variable">--outdir</span> ./output</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--token</span> your-access-token <span class="token parameter variable">--outdir</span> ./output</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="方式二-编程接口" tabindex="-1"><a class="header-anchor" href="#方式二-编程接口"><span>方式二：编程接口</span></a></h3>
 <p>创建一个简单的导出脚本：</p>
@@ -34,7 +34,7 @@
 <span class="line"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="line">  <span class="token keyword">try</span> <span class="token punctuation">{</span></span>
 <span class="line">    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">exportSwagger</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">token</span><span class="token operator">:</span> <span class="token string">'your-access-token'</span><span class="token punctuation">,</span> <span class="token comment">// 或使用环境变量</span></span>
 <span class="line">      <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./output'</span></span>
 <span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>

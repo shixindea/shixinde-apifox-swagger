@@ -22,7 +22,7 @@ import { exportSwagger } from '@shixinde/apifox-swagger';
 async function exportAPI() {
   try {
     const result = await exportSwagger({
-      projectId: '2364643',
+      projectId: '266643',
       token: 'your-access-token',
       outdir: './output'
     });
@@ -78,7 +78,7 @@ import { exportSwagger } from '@shixinde/apifox-swagger';
 
 async function basicExport() {
   const result = await exportSwagger({
-    projectId: '2364643',
+    projectId: '266643',
     token: process.env.APIFOX_ACCESS_TOKEN,
     outdir: './src/types'
   });
@@ -92,7 +92,7 @@ async function basicExport() {
 ```javascript
 async function exportFolder() {
   const result = await exportSwagger({
-    projectId: '2364643',
+    projectId: '266643',
     token: process.env.APIFOX_ACCESS_TOKEN,
     outdir: './src/types/user',
     folderId: '123456',
@@ -120,7 +120,7 @@ async function exportMultipleModules() {
       console.log(`正在导出 ${module.name}...`);
       
       const result = await exportSwagger({
-        projectId: '2364643',
+        projectId: '266643',
         token: process.env.APIFOX_ACCESS_TOKEN,
         outdir: module.outdir,
         folderId: module.folderId,
@@ -151,7 +151,7 @@ async function parallelExport() {
   
   const promises = modules.map(module => 
     exportSwagger({
-      projectId: '2364643',
+      projectId: '266643',
       token: process.env.APIFOX_ACCESS_TOKEN,
       outdir: module.outdir,
       folderId: module.folderId,
@@ -182,7 +182,7 @@ async function parallelExport() {
 
 ```javascript
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   outdir: './src/types',
   token: process.env.APIFOX_ACCESS_TOKEN,
   
@@ -276,7 +276,7 @@ class APIExporter {
 
 // 使用示例
 const exporter = new APIExporter({
-  projectId: '2364643',
+  projectId: '266643',
   token: process.env.APIFOX_ACCESS_TOKEN
 });
 
@@ -302,7 +302,7 @@ const results = await exporter.exportAll(modules);
 async function exportWithErrorHandling() {
   try {
     const result = await exportSwagger({
-      projectId: '2364643',
+      projectId: '266643',
       token: process.env.APIFOX_ACCESS_TOKEN,
       outdir: './output'
     });
@@ -393,7 +393,7 @@ cron.schedule('0 2 * * *', async () => {
   
   try {
     const result = await exportSwagger({
-      projectId: '2364643',
+      projectId: '266643',
       token: process.env.APIFOX_ACCESS_TOKEN,
       outdir: './src/types'
     });
@@ -443,7 +443,7 @@ export default {
   // ... 其他配置
   plugins: [
     new ApifoxWebpackPlugin({
-      projectId: '2364643',
+      projectId: '266643',
       token: process.env.APIFOX_ACCESS_TOKEN,
       outdir: './src/types'
     })

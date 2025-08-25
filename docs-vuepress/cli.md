@@ -14,7 +14,7 @@ apifox-swagger [选项]
 
 | 选项 | 类型 | 描述 | 示例 |
 |------|------|------|------|
-| `--projectId <id>` | string | Apifox 项目 ID | `--projectId 2364643` |
+| `--projectId <id>` | string | Apifox 项目 ID | `--projectId 266643` |
 | `--outdir <path>` | string | 输出目录路径 | `--outdir ./output` |
 
 ### 认证选项
@@ -45,7 +45,7 @@ apifox-swagger [选项]
 导出整个项目的 API 文档：
 
 ```bash
-apifox-swagger --projectId 2364643 --outdir ./output
+apifox-swagger --projectId 266643 --outdir ./output
 ```
 
 ### 2. 使用访问令牌
@@ -53,7 +53,7 @@ apifox-swagger --projectId 2364643 --outdir ./output
 直接在命令中指定访问令牌：
 
 ```bash
-apifox-swagger --projectId 2364643 --token your-access-token --outdir ./output
+apifox-swagger --projectId 266643 --token your-access-token --outdir ./output
 ```
 
 ### 3. 导出指定文件夹
@@ -62,13 +62,13 @@ apifox-swagger --projectId 2364643 --token your-access-token --outdir ./output
 
 ```bash
 # 使用文件夹 ID
-apifox-swagger --projectId 2364643 --folderId 123456 --outdir ./output
+apifox-swagger --projectId 266643 --folderId 123456 --outdir ./output
 
 # 使用文件夹名称
-apifox-swagger --projectId 2364643 --folderName "用户模块" --outdir ./output
+apifox-swagger --projectId 266643 --folderName "用户模块" --outdir ./output
 
 # 同时指定文件夹 ID 和名称
-apifox-swagger --projectId 2364643 --folderId 123456 --folderName "用户模块" --outdir ./output
+apifox-swagger --projectId 266643 --folderId 123456 --folderName "用户模块" --outdir ./output
 ```
 
 ### 4. 环境变量配合使用
@@ -78,7 +78,7 @@ apifox-swagger --projectId 2364643 --folderId 123456 --folderName "用户模块"
 ```bash
 # 设置环境变量
 export APIFOX_ACCESS_TOKEN=your-access-token
-export APIFOX_PROJECT_ID=2364643
+export APIFOX_PROJECT_ID=266643
 
 # 简化的命令
 apifox-swagger --projectId $APIFOX_PROJECT_ID --outdir ./output
@@ -91,9 +91,9 @@ apifox-swagger --projectId $APIFOX_PROJECT_ID --outdir ./output
 ```json
 {
   "scripts": {
-    "export-api": "apifox-swagger --projectId 2364643 --outdir ./src/types",
-    "export-user-api": "apifox-swagger --projectId 2364643 --folderName \"用户模块\" --outdir ./src/types/user",
-    "export-order-api": "apifox-swagger --projectId 2364643 --folderName \"订单模块\" --outdir ./src/types/order"
+    "export-api": "apifox-swagger --projectId 266643 --outdir ./src/types",
+    "export-user-api": "apifox-swagger --projectId 266643 --folderName \"用户模块\" --outdir ./src/types/user",
+    "export-order-api": "apifox-swagger --projectId 266643 --folderName \"订单模块\" --outdir ./src/types/order"
   }
 }
 ```
@@ -119,15 +119,15 @@ npm run export-order-api
 echo "开始导出 API 文档..."
 
 # 导出用户模块
-apifox-swagger --projectId 2364643 --folderName "用户模块" --outdir ./src/types/user
+apifox-swagger --projectId 266643 --folderName "用户模块" --outdir ./src/types/user
 echo "用户模块导出完成"
 
 # 导出订单模块
-apifox-swagger --projectId 2364643 --folderName "订单模块" --outdir ./src/types/order
+apifox-swagger --projectId 266643 --folderName "订单模块" --outdir ./src/types/order
 echo "订单模块导出完成"
 
 # 导出产品模块
-apifox-swagger --projectId 2364643 --folderName "产品模块" --outdir ./src/types/product
+apifox-swagger --projectId 266643 --folderName "产品模块" --outdir ./src/types/product
 echo "产品模块导出完成"
 
 echo "所有模块导出完成！"
@@ -171,7 +171,7 @@ jobs:
         env:
           APIFOX_ACCESS_TOKEN: ${{ secrets.APIFOX_ACCESS_TOKEN }}
         run: |
-          npx apifox-swagger --projectId 2364643 --outdir ./src/types
+          npx apifox-swagger --projectId 266643 --outdir ./src/types
           
       - name: Commit changes
         run: |
@@ -214,7 +214,7 @@ nodemon --watch apifox.config.js --exec "npm run export-api"
 export DEBUG=apifox-swagger:*
 
 # 运行命令
-apifox-swagger --projectId 2364643 --outdir ./output
+apifox-swagger --projectId 266643 --outdir ./output
 ```
 
 ## 性能优化
@@ -226,10 +226,10 @@ apifox-swagger --projectId 2364643 --outdir ./output
 ```bash
 # 使用 GNU parallel（如果可用）
 parallel -j 4 ::: \
-  "apifox-swagger --projectId 2364643 --folderName '用户模块' --outdir ./types/user" \
-  "apifox-swagger --projectId 2364643 --folderName '订单模块' --outdir ./types/order" \
-  "apifox-swagger --projectId 2364643 --folderName '产品模块' --outdir ./types/product" \
-  "apifox-swagger --projectId 2364643 --folderName '支付模块' --outdir ./types/payment"
+  "apifox-swagger --projectId 266643 --folderName '用户模块' --outdir ./types/user" \
+  "apifox-swagger --projectId 266643 --folderName '订单模块' --outdir ./types/order" \
+  "apifox-swagger --projectId 266643 --folderName '产品模块' --outdir ./types/product" \
+  "apifox-swagger --projectId 266643 --folderName '支付模块' --outdir ./types/payment"
 ```
 
 ### 2. 缓存策略
@@ -255,7 +255,7 @@ if [ -f "$CACHE_FILE" ]; then
 fi
 
 echo "导出新的 API 文档..."
-apifox-swagger --projectId 2364643 --outdir ./output
+apifox-swagger --projectId 266643 --outdir ./output
 
 if [ $? -eq 0 ]; then
   echo $CURRENT_TIME > "$CACHE_FILE"

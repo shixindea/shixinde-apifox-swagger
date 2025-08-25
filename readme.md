@@ -31,19 +31,19 @@ pnpm add @shixinde/apifox-swagger
 
 ```bash
 # 基本用法 - 导出整个项目
-apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output
+apifox-swagger apifox-swagger --projectId 266643 --outdir ./output
 
 # 导出指定文件夹
-apifox-swagger apifox-swagger --projectId 2364643 --folderId 123456 --folderName "用户模块" --outdir ./output
+apifox-swagger apifox-swagger --projectId 266643 --folderId 123456 --folderName "用户模块" --outdir ./output
 
 # 使用 token 参数
-apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --token your-access-token
+apifox-swagger apifox-swagger --projectId 266643 --outdir ./output --token your-access-token
 
 # 生成类型安全的 API 工具
-apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --types
+apifox-swagger apifox-swagger --projectId 266643 --outdir ./output --types
 
 # 或使用环境变量
-APIOFX_ACCESS_TOKEN=your-token apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --types
+APIOFX_ACCESS_TOKEN=your-token apifox-swagger apifox-swagger --projectId 266643 --outdir ./output --types
 ```
 
 <!-- #### 本地模式（）
@@ -75,7 +75,7 @@ import { exportSwagger } from '@shixinde/apifox-swagger';
 
 // 从云端导出
 const result = await exportSwagger({
-  projectId: '2364643',
+  projectId: '266643',
   token: 'your-access-token',
   outdir: './output',
   useLocal: false
@@ -83,7 +83,7 @@ const result = await exportSwagger({
 
 // 从云端导出并生成类型文件
 const result = await exportSwagger({
-  projectId: '2364643',
+  projectId: '266643',
   token: 'your-access-token',
   outdir: './output',
   useLocal: false,
@@ -103,7 +103,7 @@ const result = await exportSwagger({
 
 ```javascript
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   outdir: './src/types',
   useLocal: false,
   // token: 'your-token', // 可选，也可通过环境变量设置
@@ -153,7 +153,7 @@ export APIFOX_ACCESS_TOKEN=your-access-token
 
 ```
 APIFOX_ACCESS_TOKEN=your-access-token
-APIFOX_PROJECT_ID=2364643
+APIFOX_PROJECT_ID=266643
 ```
 
 ## 输出文件
@@ -200,7 +200,7 @@ APIFOX_PROJECT_ID=2364643
 
 1. 在 Apifox 中打开你的项目
 2. 查看浏览器地址栏，URL 中包含项目 ID
-3. 例如：`https://www.apifox.cn/web/project/2364643` 中的 `2364643` 就是项目 ID
+3. 例如：`https://www.apifox.cn/web/project/266643` 中的 `266643` 就是项目 ID
 
 ## 故障排除
 
@@ -266,7 +266,7 @@ APIFOX_PROJECT_ID=2364643
 
 ```javascript
 export default {
-  projectId: '2364643',
+  projectId: '266643',
   outdir: './src/types',
   
   // 类型导出配置
@@ -284,7 +284,7 @@ export default {
 
 ```bash
 # 生成类型文件
-apifox-swagger apifox-swagger --projectId 2364643 --outdir ./output --types
+apifox-swagger apifox-swagger --projectId 266643 --outdir ./output --types
 ```
 
 #### 单个类型文件使用
@@ -324,7 +324,7 @@ export default {
     outdir: './src/swagger',
     // 多个类型文件配置
     files: [
-      { filename: 'user', projectId: '2364643' },
+      { filename: 'user', projectId: '266643' },
       { filename: 'order', projectId: '2364644' },
       { filename: 'product', projectId: '2364645' }
     ]

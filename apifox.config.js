@@ -6,7 +6,7 @@
 
 export default {
   // Apifox 项目 ID（必需，当使用云端 API 时）
-  projectId: '2364643',
+  projectId: '266643',
   
   // 访问令牌（可选，也可以通过环境变量 APIFOX_ACCESS_TOKEN 设置）
   // token: 'your-apifox-access-token',
@@ -27,7 +27,7 @@ export default {
     
     // 多个类型文件配置示例
     // files: [
-    //   { filename: 'user', projectId: '2364643' },
+    //   { filename: 'user', projectId: '266643' },
     //   { filename: 'order', projectId: '2364644' },
     //   { filename: 'product', projectId: '2364645' }
     // ]

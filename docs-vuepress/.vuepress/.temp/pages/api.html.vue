@@ -14,7 +14,7 @@
 <span class="line"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">exportAPI</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="line">  <span class="token keyword">try</span> <span class="token punctuation">{</span></span>
 <span class="line">    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">exportSwagger</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">token</span><span class="token operator">:</span> <span class="token string">'your-access-token'</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./output'</span></span>
 <span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
@@ -57,7 +57,7 @@
 <span class="line"></span>
 <span class="line"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">basicExport</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="line">  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">exportSwagger</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types'</span></span>
 <span class="line">  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
@@ -68,7 +68,7 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_2-导出指定文件夹" tabindex="-1"><a class="header-anchor" href="#_2-导出指定文件夹"><span>2. 导出指定文件夹</span></a></h3>
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre class="language-javascript"><code><span class="line"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">exportFolder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="line">  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">exportSwagger</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">    <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types/user'</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token literal-property property">folderId</span><span class="token operator">:</span> <span class="token string">'123456'</span><span class="token punctuation">,</span></span>
@@ -93,7 +93,7 @@
 <span class="line">      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">正在导出 </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>module<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">...</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line">      </span>
 <span class="line">      <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">exportSwagger</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">        <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">        <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">        <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">        <span class="token literal-property property">outdir</span><span class="token operator">:</span> module<span class="token punctuation">.</span>outdir<span class="token punctuation">,</span></span>
 <span class="line">        <span class="token literal-property property">folderId</span><span class="token operator">:</span> module<span class="token punctuation">.</span>folderId<span class="token punctuation">,</span></span>
@@ -121,7 +121,7 @@
 <span class="line">  </span>
 <span class="line">  <span class="token keyword">const</span> promises <span class="token operator">=</span> modules<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">module</span> <span class="token operator">=></span> </span>
 <span class="line">    <span class="token function">exportSwagger</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">outdir</span><span class="token operator">:</span> module<span class="token punctuation">.</span>outdir<span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">folderId</span><span class="token operator">:</span> module<span class="token punctuation">.</span>folderId<span class="token punctuation">,</span></span>
@@ -147,7 +147,7 @@
 <h3 id="_1-使用配置文件" tabindex="-1"><a class="header-anchor" href="#_1-使用配置文件"><span>1. 使用配置文件</span></a></h3>
 <p>创建 <code v-pre>apifox.config.js</code>：</p>
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre class="language-javascript"><code><span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">  </span>
@@ -235,7 +235,7 @@
 <span class="line"></span>
 <span class="line"><span class="token comment">// 使用示例</span></span>
 <span class="line"><span class="token keyword">const</span> exporter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">APIExporter</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">  <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span></span>
 <span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
 <span class="line"></span>
@@ -257,7 +257,7 @@
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre class="language-javascript"><code><span class="line"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">exportWithErrorHandling</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
 <span class="line">  <span class="token keyword">try</span> <span class="token punctuation">{</span></span>
 <span class="line">    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">exportSwagger</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./output'</span></span>
 <span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
@@ -338,7 +338,7 @@
 <span class="line">  </span>
 <span class="line">  <span class="token keyword">try</span> <span class="token punctuation">{</span></span>
 <span class="line">    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">exportSwagger</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types'</span></span>
 <span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
@@ -382,7 +382,7 @@
 <span class="line">  <span class="token comment">// ... 其他配置</span></span>
 <span class="line">  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span></span>
 <span class="line">    <span class="token keyword">new</span> <span class="token class-name">ApifoxWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span></span>
-<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'2364643'</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token literal-property property">projectId</span><span class="token operator">:</span> <span class="token string">'266643'</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">token</span><span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">APIFOX_ACCESS_TOKEN</span><span class="token punctuation">,</span></span>
 <span class="line">      <span class="token literal-property property">outdir</span><span class="token operator">:</span> <span class="token string">'./src/types'</span></span>
 <span class="line">    <span class="token punctuation">}</span><span class="token punctuation">)</span></span>

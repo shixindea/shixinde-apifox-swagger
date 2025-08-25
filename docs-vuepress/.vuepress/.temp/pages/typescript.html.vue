@@ -22,7 +22,7 @@
 <h2 id="快速开始" tabindex="-1"><a class="header-anchor" href="#快速开始"><span>快速开始</span></a></h2>
 <h3 id="_1-生成类型文件" tabindex="-1"><a class="header-anchor" href="#_1-生成类型文件"><span>1. 生成类型文件</span></a></h3>
 <div class="language-bash line-numbers-mode" data-highlighter="prismjs" data-ext="sh" data-title="sh"><pre v-pre class="language-bash"><code><span class="line"><span class="token comment"># 导出 API 文档并生成类型</span></span>
-<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">2364643</span> <span class="token parameter variable">--outdir</span> ./src/types</span>
+<span class="line">apifox-swagger <span class="token parameter variable">--projectId</span> <span class="token number">266643</span> <span class="token parameter variable">--outdir</span> ./src/types</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div></div></div><p>生成的文件结构：</p>
 <div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre class="language-text"><code><span class="line">src/types/</span>
@@ -600,7 +600,7 @@
 <span class="line">  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
 <span class="line">    <span class="token property">"dev"</span><span class="token operator">:</span> <span class="token string">"npm run export-api &amp;&amp; vite"</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"npm run export-api &amp;&amp; vite build"</span><span class="token punctuation">,</span></span>
-<span class="line">    <span class="token property">"export-api"</span><span class="token operator">:</span> <span class="token string">"apifox-swagger --projectId 2364643 --outdir ./src/types"</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token property">"export-api"</span><span class="token operator">:</span> <span class="token string">"apifox-swagger --projectId 266643 --outdir ./src/types"</span><span class="token punctuation">,</span></span>
 <span class="line">    <span class="token property">"watch-api"</span><span class="token operator">:</span> <span class="token string">"nodemon --watch apifox.config.js --exec \"npm run export-api\""</span></span>
 <span class="line">  <span class="token punctuation">}</span></span>
 <span class="line"><span class="token punctuation">}</span></span>

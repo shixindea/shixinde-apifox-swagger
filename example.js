@@ -10,7 +10,7 @@ import { exportSwagger } from '@shixinde/apifox-swagger';
 async function exportFromCloud() {
   try {
     const result = await exportSwagger({
-      projectId: '2364643', // 替换为你的项目 ID
+      projectId: '266643', // 替换为你的项目 ID
       token: 'your-apifox-access-token', // 替换为你的访问令牌
       outdir: './output', // 输出目录
       useLocal: false // 使用云端 API
