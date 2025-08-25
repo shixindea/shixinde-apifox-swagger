@@ -12,7 +12,7 @@
 <ol>
 <li>在 Apifox 中打开你的项目</li>
 <li>查看浏览器地址栏，URL 中包含项目 ID</li>
-<li>例如：<code v-pre>https://www.apifox.cn/web/project/266643</code> 中的 <code v-pre>266643</code> 就是项目 ID</li>
+<li>例如：<code v-pre>https://www.apifox.cn/web/project/2666643</code> 中的 <code v-pre>2666643</code> 就是项目 ID</li>
 </ol>
 <h2 id="第一次使用" tabindex="-1"><a class="header-anchor" href="#第一次使用"><span>第一次使用</span></a></h2>
 <h3 id="方式一-命令行工具-推荐新手" tabindex="-1"><a class="header-anchor" href="#方式一-命令行工具-推荐新手"><span>方式一：命令行工具（推荐新手）</span></a></h3>
