@@ -209,7 +209,7 @@ const exportSwagger = async ({ projectId, outdir, folderId, folderName, useLocal
     const ast = await (0, __WEBPACK_EXTERNAL_MODULE_openapi_typescript__["default"])(swagger, {});
 
     // 确保输出目录存在
-    __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].ensureDirSync(`${outdir}/swagger`);
+    __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].ensureDirSync(`${outdir}`);
 
     // 保存 JSON 格式的 Swagger 文档
     __WEBPACK_EXTERNAL_MODULE_fs_extra__["default"].writeJsonSync(swaggerPath, swagger, {
